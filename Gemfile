@@ -37,6 +37,8 @@ gem 'jbuilder', '~> 2.5'
 
 # use semantic-ui for styling
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
+# use devise for authentication
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

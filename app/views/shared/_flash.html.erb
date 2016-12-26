@@ -1,0 +1,7 @@
+<% flash.each do |type, message| %>
+  <div class="ui <%= semantic_ui_class_for(type) %> message closeable">
+    <i class="close icon"></i>
+    <i class="<%=semantic_ui_icon(type)%>"></i>
+    <%= message %>
+  </div>
+<% end %>

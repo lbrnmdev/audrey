@@ -11,8 +11,7 @@
         </div>
       </h2>
 
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class:'ui large inverted form' }) do |f| %>
-        <div class="ui raised inverted segment">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class:'ui large inverted form fluid segment' }) do |f| %>
 
           <div class="field">
             <div class="ui left icon input">
@@ -41,7 +40,6 @@
             <%= f.submit "Log in", class: "ui fluid large teal submit button" %>
           </div>
 
-        </div>
       <% end %>
 
       <div class="ui message">

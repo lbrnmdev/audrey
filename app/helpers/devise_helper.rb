@@ -4,7 +4,7 @@ module DeviseHelper
 
     messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
     html = <<-HTML
-    <div class="ui error message">
+    <div class="ui attached error message">
       <i class="close icon"></i>
       #{messages}
     </div>

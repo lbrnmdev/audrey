@@ -1,1 +1,17 @@
 // put all custom css in here
+body {
+
+  .page-content {
+    padding-top: 70px
+  }
+
+  .sidebar-menu-items {
+    padding-top: 70px
+  }
+
+  // for logo on inverted backgrounds
+  .image.reversed {
+    filter: invert(100%);
+  }
+
+}

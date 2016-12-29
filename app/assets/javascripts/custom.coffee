@@ -1,9 +1,9 @@
-# TODO Fix this!
 # dismiss flash messages
-# $('.message .close').on 'click', ->
-#   $(this).closest('.message').transition 'fade'
-#   return
-$ ->
-  $(".message.closable .close.icon").on "click", ->
-    $('.message.closable').fadeOut("slow")
-    false
+# toggle sidebar
+
+$(document).ready ->
+  $('.message .close').on 'click', ->
+    $(this).closest('.message').transition 'fade'
+    return
+  $('.left.sidebar').first().sidebar 'attach events', '#toggle-sidebar'
+  return

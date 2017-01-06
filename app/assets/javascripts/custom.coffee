@@ -1,7 +1,7 @@
 # dismiss flash messages
 # toggle sidebar
 
-$(document).ready ->
+$(document).on 'turbolinks:load', ->
   $('.message .close').on 'click', ->
     $(this).closest('.message').transition 'fade'
     return

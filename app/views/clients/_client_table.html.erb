@@ -1,0 +1,17 @@
+<table class="ui unstackable selectable teal table">
+  <thead>
+    <tr>
+      <th>Lastname</th>
+      <th>Other names</th>
+      <th class="right aligned">Telephone</th>
+    </tr>
+  </thead>
+
+  <% @clients.each do |client| %>
+    <tr>
+      <td class="selectable"><%= link_to client.lastname, client %></td>
+      <td class="selectable"><%= link_to(client.other_names, client) || '-' %></td>
+      <td class="selectable right aligned"><%= link_to(client.telephone, client) || '-' %></td>
+    </tr>
+  <% end %>
+</table>

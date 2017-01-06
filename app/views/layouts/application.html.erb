@@ -60,10 +60,10 @@
           <div class="item">
             <div class="header">clients</div>
             <div class="menu">
-              <a class="item">
+              <%= link_to clients_path, class: 'item' do %>
                 <i class="users icon"></i>
                 list
-              </a>
+              <% end %>
               <a class="item">
                 <i class="add user icon"></i>
                 new client

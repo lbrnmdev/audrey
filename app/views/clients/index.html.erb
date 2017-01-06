@@ -1,0 +1,15 @@
+<div class="ui container">
+  <!-- page header -->
+  <h1 class="ui header">
+    <i class="users icon"></i>
+    <div class="content">
+      Clients
+      <div class="sub header">
+        View all your clients
+      </div>
+    </div>
+  </h1>
+
+  <!-- client list -->
+  <%= render(@clients.any? ? 'client_table' : 'no_clients') %>
+</div>

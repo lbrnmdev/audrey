@@ -21,9 +21,7 @@
         <a class="item" id="toggle-sidebar">
           <i class="sidebar icon"></i>
         </a>
-        <a href="#" class="header item">
-          audrey
-        </a>
+        <%= link_to 'audrey', authenticated_root_path, class:'header item' %>
         <div class="right menu">
           <div class="ui simple dropdown item">
             <%= current_user.email %> <i class="dropdown icon"></i>

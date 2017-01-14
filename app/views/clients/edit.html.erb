@@ -56,13 +56,29 @@
 
         <div class="actions">
           <div class="two ui buttons">
-            <%= link_to 'Cancel', @client, class:'ui negative button' %>
+            <%= link_to 'Cancel', @client, class:'ui button' %>
             <div class="or"></div>
             <%= f.submit "Save changes", class: "ui positive button" %>
           </div>
         </div>
 
       <% end %>
+
+      <div class="ui divider"></div>
+
+      <div class="ui inverted clearing segment">
+        <h5 class="ui red inverted header">
+          Delete client
+          <div class="sub header">
+            This action permanently removes this client from the database.
+            You will lose all related client data
+          </div>
+        </h5>
+        <%= link_to @client, method: :delete, data: {confirm: "Are you sure you want to delete this client?"}, class:'ui inverted right floated red basic button' do %>
+          <i class="icon trash"></i>
+          Delete this client
+        <% end %>
+      </div>
 
     </div>
   </div>

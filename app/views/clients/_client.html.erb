@@ -1,7 +1,9 @@
 <div class="ui centered raised teal card">
   <div class="content">
-    <%= link_to '#' do %>
-      <i class="right floated large setting icon"></i>
+    <%= link_to edit_client_path @client do%>
+      <div class="ui teal circular basic icon button right floated" data-tooltip="Edit client info" data-inverted="">
+        <i class="settings icon"></i>
+      </div>
     <% end %>
     <div class="header">
       <%= @client.other_names || "" %> <%= @client.lastname %>

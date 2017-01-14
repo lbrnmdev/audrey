@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show]
+  before_action :set_client, only: [:show, :edit, :update]
 
   def index
     @clients = current_user.clients
@@ -19,6 +19,18 @@ class ClientsController < ApplicationController
       redirect_to @client
     else
       render 'new'
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @client.update_attributes client_params
+      flash[:success] = "Client info updated!"
+      redirect_to @client
+    else
+      render 'edit'
     end
   end
 

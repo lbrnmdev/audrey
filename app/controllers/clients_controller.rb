@@ -1,6 +1,5 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
-  before_action :check_user_authorization, only: [:show, :edit, :update, :destroy]
 
   def index
     @clients = current_user.clients
@@ -47,18 +46,11 @@ class ClientsController < ApplicationController
 
     def set_client
       @client = Client.find(params[:id])
+      check_user_authorization_for @client
     end
 
     def client_params
       params.require(:client).permit(:lastname, :other_names, :telephone, :email, :address)
-    end
-
-    # TODO move this to application controller, should ensure current_user owns resource
-    def check_user_authorization
-      if current_user != @client.user
-        flash[:error] = "You are not authorized to work with this client!"
-        redirect_to authenticated_root_url
-      end
     end
 
 end

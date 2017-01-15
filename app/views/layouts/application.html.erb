@@ -17,86 +17,10 @@
 
     <% if user_signed_in? %>
       <!-- fixed navbar -->
-      <div class="ui teal fixed inverted menu">
-        <a class="item" id="toggle-sidebar">
-          <i class="sidebar icon"></i>
-        </a>
-        <%= link_to 'audrey', authenticated_root_path, class:'header item' %>
-        <div class="right menu">
-          <div class="ui simple dropdown item">
-            <%= current_user.email %> <i class="dropdown icon"></i>
-            <div class="ui vertical menu">
-              <%= link_to edit_user_registration_path, class: 'item' do %>
-                <i class="setting icon"></i> profile
-              <% end %>
-              <div class="divider"></div>
-              <%= link_to destroy_user_session_path, class: 'item', method: :delete do %>
-                <i class="sign out icon"></i> logout
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- fixed navbar -->
+      <%= render 'components/fixed_navbar' %>
 
       <!-- left sidebar -->
-      <div class="ui left vertical menu sidebar inverted">
-        <div class="container sidebar-menu-items">
-          <div class="item">
-            <a class="ui logo icon image" href="#">
-              <%= image_tag("logo.svg", class: "ui mini image reversed") %>
-            </a>
-            <div class="bottom aligned content">
-              <div class="header">
-                audrey
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <a class="header">overview</a>
-          </div>
-          <div class="item">
-            <div class="header">clients</div>
-            <div class="menu">
-              <%= link_to clients_path, class: 'item' do %>
-                <i class="users icon"></i>
-                list
-              <% end %>
-              <%= link_to new_client_path, class: 'item' do %>
-                <i class="add user icon"></i>
-                new client
-              <% end %>
-            </div>
-          </div>
-          <div class="item">
-            <div class="header">vehicles</div>
-            <div class="menu">
-              <a class="item">
-                <i class="list icon"></i>
-                list all
-              </a>
-              <a class="item">
-                <i class="car icon"></i>
-                new vehicle
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="header">policies</div>
-            <div class="menu">
-              <a class="item">
-                <i class="folder open icon"></i>
-                list
-              </a>
-              <a class="item">
-                <i class="file text icon"></i>
-                new policy
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- left sidebar -->
+      <%= render 'components/left_sidebar' %>
     <% end %>
 
     <!-- page content -->

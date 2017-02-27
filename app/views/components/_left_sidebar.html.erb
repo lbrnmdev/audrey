@@ -29,10 +29,10 @@
     <div class="item">
       <div class="header">vehicles</div>
       <div class="menu">
-        <a class="item">
+        <%= link_to vehicles_path, class: 'item' do %>
           <i class="list icon"></i>
           list all
-        </a>
+        <% end %>
         <a class="item">
           <i class="car icon"></i>
           new vehicle

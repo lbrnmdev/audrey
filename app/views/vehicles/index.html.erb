@@ -1,0 +1,15 @@
+<div class="ui container">
+  <!-- page header -->
+  <h1 class="ui header">
+    <i class="car icon"></i>
+    <div class="content">
+      Vehicles
+      <div class="sub header">
+        View all vehicles
+      </div>
+    </div>
+  </h1>
+
+  <!-- vehicle list -->
+  <%= render(@vehicles.any? ? 'vehicle_table' : 'no_vehicles') %>
+</div>

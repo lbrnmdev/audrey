@@ -1,0 +1,19 @@
+<table class="ui unstackable selectable teal table">
+  <thead>
+    <tr>
+      <th>Reg No</th>
+      <th>Make</th>
+      <th>Model</th>
+      <th class="right aligned">Client</th>
+    </tr>
+  </thead>
+
+  <% @vehicles.each do |vehicle| %>
+    <tr>
+      <td class="selectable"><%= link_to vehicle.registration_no, vehicle %></td>
+      <td><%= vehicle.make %></td>
+      <td><%= vehicle.model %></td>
+      <td class="selectable right aligned"><%= link_to(("#{vehicle.client.lastname}#{vehicle.client.other_names ? ", #{vehicle.client.other_names}" : ""}"), vehicle.client) %></td>
+    </tr>
+  <% end %>
+</table>

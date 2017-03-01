@@ -1,0 +1,58 @@
+<div class="ui card">
+  <div class="content">
+    <div class="right floated meta">
+      owned by <%= link_to(("#{@vehicle.client.other_names || ""} #{@vehicle.client.lastname}"), @vehicle.client) %>
+    </div>
+  </div>
+  <div class="image">
+    <!-- <img src="/images/avatar2/large/matthew.png"> -->
+    <%= image_tag("placeholder.png") %>
+  </div>
+  <div class="content">
+    <div class="header"><%= "#{@vehicle.year_of_manufacture} #{@vehicle.make} #{@vehicle.model}"  %></div>
+    <div class="meta">
+      <!-- <a>Friends</a> -->
+      <%= @vehicle.registration_no %>
+    </div>
+    <div class="description">
+      <!-- this should have policy expiration date, 'expires' if future, 'expired'
+        if past. green if more than a month away, warning if within a month, red if expired -->
+      Policy expires on: <h4 class="ui green header">February 28th 2018</h4>
+    </div>
+    <div class="ui list">
+      <div class="item">
+        <div class="ui label">
+          Chassis Number
+          <div class="detail"><%= @vehicle.chassis_no %></div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui label">
+          Cubic Capacity
+          <div class="detail"><%= @vehicle.cubic_capacity %></div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui label">
+          Seating Capacity
+          <div class="detail"><%= @vehicle.seating_capacity %></div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui label">
+          Body Type
+          <div class="detail"><%= @vehicle.body_type %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="extra content">
+    <span class="right floated">
+      Joined in 2013
+    </span>
+    <span>
+      <i class="user icon"></i>
+      75 Friends
+    </span>
+  </div>
+</div>

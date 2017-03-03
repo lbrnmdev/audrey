@@ -10,6 +10,10 @@ class VehiclesController < ApplicationController
   def show
   end
 
+  def new
+    @vehicle = current_user.vehicles.new
+  end
+
   private
 
     def set_vehicle

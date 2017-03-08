@@ -75,9 +75,10 @@
         </div>
 
         <!-- change to dropdown -->
-        <div class="field <%= "error" if @vehicle.errors.details.key? :cubic_capacity %>">
+        <div class="field <%= "error" if @vehicle.errors.details.key? :client %>">
           <%= f.label :client %>
-          <%= f.text_field :client, autofocus: true %>
+          <!-- <%= f.text_field :client, autofocus: true %> -->
+          <%= f.collection_select :client_id, current_user.clients.all, :id, :lastname_other_names, {prompt: "Select the vehicle owner"} %>
         </div>
 
         <div class="actions">

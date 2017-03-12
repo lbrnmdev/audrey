@@ -1,5 +1,5 @@
 class VehiclesController < ApplicationController
-  before_action :set_vehicle, only: [:show]
+  before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
 
   def index
     # should this be vehicles specific to current user or the whole system?
@@ -22,6 +22,26 @@ class VehiclesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
+  end
+
+  def update
+    if @vehicle.update_attributes vehicle_params
+      flash[:success] = "Vehicle info updated!"
+      redirect_to @vehicle
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    client = @vehicle.client
+    vehicle_name = "#{@vehicle.year_of_manufacture} #{@vehicle.make} #{@vehicle.model}"
+    @vehicle.destroy
+    flash[:success] = "#{client.other_names_lastname}'s #{vehicle_name} deleted!"
+    redirect_to client
   end
 
   private

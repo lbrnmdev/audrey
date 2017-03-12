@@ -10,6 +10,19 @@
 
     <div class="eleven wide column">
 
+      <!-- display client's vehicles -->
+      <h4 class="ui dividing header">
+        <i class="car icon"></i>
+        <div class="content">
+          Vehicles owned
+        </div>
+      </h4>
+
+      <div class="ui cards">
+        <%= render @client.vehicles %>
+      </div>
+      <!-- end display client's vehicles -->
+
     </div>
   </div>
 </div>

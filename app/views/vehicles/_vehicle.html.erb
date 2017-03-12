@@ -1,18 +1,16 @@
 <div class="ui card">
   <div class="content">
     <div class="right floated meta">
-      owned by <%= link_to(("#{@vehicle.client.other_names || ""} #{@vehicle.client.lastname}"), @vehicle.client) %>
+      owned by <%= link_to(("#{vehicle.client.other_names || ""} #{vehicle.client.lastname}"), vehicle.client) %>
     </div>
   </div>
   <div class="image">
-    <!-- <img src="/images/avatar2/large/matthew.png"> -->
     <%= image_tag("placeholder.png") %>
   </div>
   <div class="content">
-    <div class="header"><%= "#{@vehicle.year_of_manufacture} #{@vehicle.make} #{@vehicle.model}"  %></div>
+    <div class="header"><%= link_to "#{vehicle.year_of_manufacture} #{vehicle.make} #{vehicle.model}", vehicle  %></div>
     <div class="meta">
-      <!-- <a>Friends</a> -->
-      <%= @vehicle.registration_no %>
+      <%= link_to vehicle.registration_no, vehicle %>
     </div>
     <div class="description">
       <!-- this should have policy expiration date, 'expires' if future, 'expired'
@@ -23,32 +21,32 @@
       <div class="item">
         <div class="ui label">
           Chassis No.
-          <div class="detail"><%= @vehicle.chassis_no %></div>
+          <div class="detail"><%= vehicle.chassis_no %></div>
         </div>
       </div>
       <div class="item">
         <div class="ui label">
           Cubic Capacity
-          <div class="detail"><%= @vehicle.cubic_capacity %></div>
+          <div class="detail"><%= vehicle.cubic_capacity %></div>
         </div>
       </div>
       <div class="item">
         <div class="ui label">
           Seating Capacity
-          <div class="detail"><%= @vehicle.seating_capacity %></div>
+          <div class="detail"><%= vehicle.seating_capacity %></div>
         </div>
       </div>
       <div class="item">
         <div class="ui label">
           Body Type
-          <div class="detail"><%= @vehicle.body_type %></div>
+          <div class="detail"><%= vehicle.body_type %></div>
         </div>
       </div>
     </div>
   </div>
   <div class="extra content">
     <span class="right floated">
-      Added <%= @vehicle.created_at.to_formatted_s(:long) %>
+      Added <%= vehicle.created_at.to_formatted_s(:long) %>
     </span>
   </div>
 </div>

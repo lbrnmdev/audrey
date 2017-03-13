@@ -18,9 +18,15 @@
         </div>
       </h4>
 
-      <div class="ui cards">
-        <%= render @client.vehicles %>
-      </div>
+      <% if @client.vehicles.empty? %>
+        <div class="ui center aligned teal segment">
+          This client has no vehicles, add new vehicle <%= link_to 'here', new_vehicle_path %>
+        </div>
+      <% else %>
+        <div class="ui cards">
+          <%= render @client.vehicles %>
+        </div>
+      <% end %>
       <!-- end display client's vehicles -->
 
     </div>

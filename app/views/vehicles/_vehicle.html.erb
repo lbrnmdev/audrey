@@ -1,6 +1,12 @@
 <div class="ui card">
   <div class="content">
-    <div class="right floated meta">
+    <%= link_to edit_vehicle_path vehicle do%>
+      <div class="ui teal circular basic icon button right floated" data-tooltip="Edit vehicle info" data-inverted="">
+        <i class="settings icon"></i>
+      </div>
+    <% end %>
+    <!-- Add header containing some vehicle related data. Current policy status for example -->
+    <div class="meta">
       owned by <%= link_to(("#{vehicle.client.other_names || ""} #{vehicle.client.lastname}"), vehicle.client) %>
     </div>
   </div>

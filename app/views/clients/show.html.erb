@@ -10,24 +10,38 @@
 
     <div class="eleven wide column">
 
-      <!-- display client's vehicles -->
-      <h4 class="ui dividing header">
-        <i class="car icon"></i>
-        <div class="content">
-          Vehicles owned
-        </div>
-      </h4>
+      <!-- begin tabbed content -->
 
-      <% if @client.vehicles.empty? %>
-        <div class="ui center aligned teal segment">
-          This client has no vehicles, add new vehicle <%= link_to 'here', new_vehicle_path %>
+        <!-- menu options TODO make this sticky -->
+        <div class="ui teal pointing secondary menu">
+          <a class="item active" data-tab="policies"><i class="file text icon"></i>Policies</a>
+          <a class="item" data-tab="vehicles"><i class="car icon"></i>Vehicles</a>
+          <a class="item" data-tab="claims"><i class="first aid icon"></i>Claims</a>
         </div>
-      <% else %>
-        <div class="ui cards">
-          <%= render @client.vehicles %>
+
+        <!-- 1. policies tab -->
+        <div class="ui tab basic segment active" data-tab="policies">
+          Client does not currently have any policies on their account. Add a new policy
         </div>
-      <% end %>
-      <!-- end display client's vehicles -->
+
+        <!-- 2. vehicles tab TODO change this to assets-->
+        <div class="ui tab basic segment" data-tab="vehicles">
+          <% if @client.vehicles.empty? %>
+            <div class="ui center aligned teal segment">
+              This client has no vehicles, add new vehicle <%= link_to 'here', new_vehicle_path %>
+            </div>
+          <% else %>
+            <div class="ui cards">
+              <%= render @client.vehicles %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- 3. claims -->
+        <div class="ui tab basic segment" data-tab="claims">
+          Client does not currently have any claims on their account
+        </div>
+      <!-- end tabbed content -->
 
     </div>
   </div>

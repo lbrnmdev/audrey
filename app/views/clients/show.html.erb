@@ -24,7 +24,7 @@
           <% if @client.policies.empty? %>
             Client does not currently have any policies on their account. Add a new policy
           <% else %>
-            <%= render 'policy_table' %>
+            <%= render partial: 'policies/policy_table', locals: { policies: @client.policies } %>
           <% end %>
         </div>
 

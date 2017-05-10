@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20170510162009) do
 
   create_table "policies", force: :cascade do |t|
     t.string   "number"
-    t.integer  "client_id"
     t.string   "policy_type"
     t.integer  "status"
     t.date     "issue_date"
@@ -37,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170510162009) do
     t.decimal  "discount"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "client_id"
     t.index ["client_id"], name: "index_policies_on_client_id"
   end
 

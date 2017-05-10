@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :vehicles
   resources :clients
+  resources :policies
 
   devise_for :users
 

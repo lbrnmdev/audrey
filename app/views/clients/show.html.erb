@@ -21,7 +21,11 @@
 
         <!-- 1. policies tab -->
         <div class="ui tab basic segment active" data-tab="policies">
-          Client does not currently have any policies on their account. Add a new policy
+          <% if @client.policies.empty? %>
+            Client does not currently have any policies on their account. Add a new policy
+          <% else %>
+            <%= render 'policy_table' %>
+          <% end %>
         </div>
 
         <!-- 2. vehicles tab TODO change this to assets-->

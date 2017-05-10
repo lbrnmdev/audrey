@@ -1,0 +1,19 @@
+<table class="ui inverted unstackable selectable teal table">
+  <thead>
+    <tr>
+      <th>Policy No.</th>
+      <th>Asset</th>
+      <th>Insurer</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <% @policies.each do |policy| %>
+    <tr>
+      <td class="selectable"><%= link_to policy.number, policy %></td>
+      <td class="selectable"><%= link_to "vehicle", '#' %></td>
+      <td class="selectable"><%= link_to "insurer", '#' %></td>
+      <td class="selectable"><%= link_to policy.status, policy %></td>
+    </tr>
+  <% end %>
+</table>

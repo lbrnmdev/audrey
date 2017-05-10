@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :clients
   has_many :vehicles, through: :clients
+  has_many :policies, through: :clients
 end

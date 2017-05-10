@@ -1,6 +1,7 @@
 class Client < ApplicationRecord
   belongs_to :user
   has_many :vehicles
+  has_many :policies
 
   validates_presence_of :lastname
   validates_presence_of :user

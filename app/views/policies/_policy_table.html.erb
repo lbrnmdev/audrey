@@ -11,7 +11,7 @@
   <% policies.each do |policy| %>
     <tr>
       <td class="selectable"><%= link_to policy.number, policy %></td>
-      <td class="selectable"><%= link_to "vehicle", '#' %></td>
+      <td class="selectable"><%= link_to "#{policy.vehicle ? policy.vehicle.registration_no : "--"}", '#' %></td>
       <td class="selectable"><%= link_to "insurer", '#' %></td>
       <td class="selectable"><%= link_to policy.status, policy %></td>
     </tr>

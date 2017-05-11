@@ -1,5 +1,6 @@
 class Vehicle < ApplicationRecord
   belongs_to :client
+  has_many :policies
 
   # TODO validate attributes
   # TODO validate uniqueness of chassis_no or registration_no??

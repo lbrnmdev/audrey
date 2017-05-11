@@ -1,0 +1,9 @@
+<!-- This is pretty much a duplicate of the no_clients screen
+     TODO perhaps consolidate into one partial and feed that relavant variables
+     via helper -->
+<div class="ui center aligned container">
+  <%= image_tag("thinking-clipart.svg", class: "ui centered medium image") %>
+  <div class="ui small header">
+    looks like there aren't any policies yet, <%= link_to 'add a new policy', new_policy_path %>
+  </div>
+</div>

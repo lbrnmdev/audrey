@@ -1,0 +1,16 @@
+<div class="ui container">
+  <!-- page header -->
+  <h1 class="ui header">
+    <i class="folder open icon"></i>
+    <div class="content">
+      Policies
+      <div class="sub header">
+        View all policies
+      </div>
+    </div>
+  </h1>
+
+  <!-- client list -->
+  <!-- TODO clean this up!! -->
+  <%= @policies.any? ? (render partial: 'policy_table', locals: { policies: @policies }) : (render 'no_policies') %>
+</div>

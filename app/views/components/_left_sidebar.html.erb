@@ -42,10 +42,10 @@
     <div class="item">
       <div class="header">policies</div>
       <div class="menu">
-        <a class="item">
+        <%= link_to policies_path, class: 'item' do %>
           <i class="folder open icon"></i>
-          list
-        </a>
+          list all
+        <% end %>
         <a class="item">
           <i class="file text icon"></i>
           new policy

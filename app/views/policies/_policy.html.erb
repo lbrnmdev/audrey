@@ -1,0 +1,62 @@
+<div class="ui centered raised teal card">
+  <div class="content">
+    <%= link_to edit_policy_path @policy do %>
+      <div class="ui teal circular basic icon button right floated" data-tooltip="Edit policy info" data-inverted="">
+        <i class="write icon"></i>
+      </div>
+    <% end %>
+    <div class="header">
+      <%= @policy.number %>
+    </div>
+    <div class="meta">
+      <span><%= @policy.policy_type.capitalize %> policy</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="ui relaxed list">
+      <div class="item">
+        <i class="car middle aligned icon"></i>
+        <div class="content">
+          <%= link_to @policy.vehicle.registration_no, @policy.vehicle, class: 'header' %>
+          <%= link_to @policy.vehicle, class:'description' do %>
+            <em><%= @policy.vehicle.year_of_manufacture %> <%= @policy.vehicle.make %> <%= @policy.vehicle.model %></em>
+          <% end %>
+        </div>
+      </div>
+      <div class="item">
+        <i class="user middle aligned icon"></i>
+        <div class="content">
+          Client is <%= link_to "#{@policy.client.other_names || ""} #{@policy.client.lastname}", @policy.client %>
+        </div>
+      </div>
+      <div class="item">
+        <i class="building outline middle aligned icon"></i>
+        <div class="content">
+          Insured by <b>Insurance Company</b>
+        </div>
+      </div>
+      <div class="item">
+        <i class="calendar middle aligned icon"></i>
+        <div class="content">
+          Valid from <b><%= @policy.start_date.to_s :rfc822 %></b></br> to <b><%= @policy.end_date.to_s :rfc822 %></b> <!-- make this red if expired -->
+        </div>
+      </div>
+      <div class="item">
+        <i class="money middle aligned icon"></i>
+        <div class="content">
+          <a class="header"><%= number_to_currency(@policy.commission  * @policy.premium) %> commission</a>
+          <div class="description">
+            <em><%= @policy.commission * 100 %>% of <%= number_to_currency(@policy.premium) %> premium</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="extra content">
+    <span class="right floated">
+      <%= @policy.issued? ? "Issued #{@policy.issue_date.to_s :rfc822}" : @policy.status %>
+    </span>
+  </div>
+</div>

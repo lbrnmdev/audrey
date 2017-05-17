@@ -8,6 +8,10 @@ class PoliciesController < ApplicationController
   def show
   end
 
+  def new
+    @policy = current_user.policies.new
+  end
+
   private
 
     def set_policy

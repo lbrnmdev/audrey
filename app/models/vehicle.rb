@@ -31,4 +31,8 @@ class Vehicle < ApplicationRecord
     body_type.upcase!
   end
 
+  # return (registration number) make model string
+  def reg_make_model
+    "#{registration_no} (#{make} #{model})"
+  end
 end

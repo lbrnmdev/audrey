@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511111639) do
+ActiveRecord::Schema.define(version: 20170518101925) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "lastname"
@@ -27,15 +27,15 @@ ActiveRecord::Schema.define(version: 20170511111639) do
   create_table "policies", force: :cascade do |t|
     t.string   "number"
     t.string   "policy_type"
-    t.integer  "status"
+    t.integer  "status",      default: 0
     t.date     "issue_date"
     t.date     "start_date"
     t.date     "end_date"
     t.decimal  "premium"
     t.decimal  "commission"
     t.decimal  "discount"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "client_id"
     t.integer  "vehicle_id"
     t.index ["client_id"], name: "index_policies_on_client_id"

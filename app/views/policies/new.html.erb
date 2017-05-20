@@ -47,15 +47,15 @@
           <div class="three fields">
             <div class="field <%= "error" if @policy.errors.details.key? :premium %>">
               <%= f.label :premium %>
-              <%= f.number_field :premium, autofocus: true %>
+              <%= f.number_field :premium, step: 0.01, autofocus: true %>
             </div>
             <div class="field <%= "error" if @policy.errors.details.key? :commission %>">
               <%= f.label :commission, 'Commission (%)' %>
-              <%= f.number_field :commission, autofocus: true %>
+              <%= f.number_field :commission, step: 0.001, autofocus: true %>
             </div>
             <div class="field <%= "error" if @policy.errors.details.key? :discount %>">
               <%= f.label :discount, 'Discount (%)' %>
-              <%= f.number_field :discount, autofocus: true %>
+              <%= f.number_field :discount, step: 0.001, autofocus: true %>
             </div>
           </div>
 

@@ -15,7 +15,7 @@ class PoliciesController < ApplicationController
   def create
     @policy = current_user.policies.new(policy_params)
     if @policy.save
-      flash[:warning] = "#{@policy.client.other_names_lastname} has a new policy!, please note that the policy is currently: #{@policy.status.humanize}"
+      flash[:warning] = "#{@policy.client.other_names_lastname} has a new policy! Please note that the policy is currently: #{@policy.status.humanize}"
       redirect_to @policy
     else
       render 'new'

@@ -1,0 +1,101 @@
+<div class="ui grid container">
+
+  <div class="row">
+      <div class="sixteen wide mobile eight wide tablet eight wide computer column">
+
+        <div class="ui header">
+          <i class="file text icon"></i>
+          <div class="content">
+            Edit Policy
+            <div class="sub header">
+              Edit Policy information
+            </div>
+          </div>
+        </div>
+
+        <!-- form -->
+        <%= form_for(@policy, html: { class: 'ui form' }) do |f| %>
+
+          <%= render 'shared/error_messages', object: f.object %>
+
+          <div class="field <%= "error" if @policy.errors.details.key? :number %>">
+            <%= f.label :number, 'Policy number' %>
+            <%= f.text_field :number, autofocus: true %>
+          </div>
+
+          <div class="field <%= "error" if @policy.errors.details.key? :policy_type %>">
+            <%= f.label :policy_type %>
+            <%= f.text_field :policy_type, autofocus: true %>
+          </div>
+
+          <div class="field">
+            <%= f.label :start_date %>
+            <div class="three fields">
+              <!-- TODO Sort out error rendering for wrapping field div which is added by jquery in policies.coffee -->
+              <%= f.date_select :start_date, { prompt:{ day:'Start day', month:'Start month', year:'Start year' } }, { class:'ui dropdown compact for_date' } %>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :end_date %>
+            <div class="three fields">
+              <!-- TODO Sort out error rendering for wrapping field div which is added by jquery in policies.coffee -->
+              <%= f.date_select :end_date, { prompt:{ day:'End day', month:'End month', year:'End year' } }, { class:'ui dropdown compact for_date' } %>
+            </div>
+          </div>
+
+          <div class="three fields">
+            <div class="field <%= "error" if @policy.errors.details.key? :premium %>">
+              <%= f.label :premium %>
+              <%= f.number_field :premium, step: 0.01, autofocus: true %>
+            </div>
+            <div class="field <%= "error" if @policy.errors.details.key? :commission %>">
+              <%= f.label :commission, 'Commission (%)' %>
+              <%= f.number_field :commission, step: 0.001, autofocus: true %>
+            </div>
+            <div class="field <%= "error" if @policy.errors.details.key? :discount %>">
+              <%= f.label :discount, 'Discount (%)' %>
+              <%= f.number_field :discount, step: 0.001, autofocus: true %>
+            </div>
+          </div>
+
+          <div class="field <%= "error" if @policy.errors.details.key? :client %>">
+            <%= f.label :client %>
+            <%= f.collection_select :client_id, current_user.clients.all, :id, :lastname_other_names, {prompt: "Select the vehicle owner"}, {class: "ui search dropdown"} %>
+          </div>
+
+          <div class="field <%= "error" if @policy.errors.details.key? :vehicle %>">
+            <%= f.label :vehicle %>
+            <%= f.collection_select :vehicle_id, current_user.vehicles.all, :id, :reg_make_model, {prompt: "Select the vehicle"}, {class: "ui search dropdown"} %>
+          </div>
+
+          <div class="actions">
+            <div class="two ui buttons">
+              <%= link_to 'Cancel', @policy, class:'ui button' %>
+              <div class="or"></div>
+              <%= f.submit "Save changes", class: "ui positive button" %>
+            </div>
+          </div>
+
+        <% end %>
+
+        <div class="ui divider"></div>
+
+        <div class="ui inverted clearing segment">
+          <h5 class="ui red inverted header">
+            Delete policy
+            <div class="sub header">
+              This action permanently removes this policy from the database.
+              You will lose all related policy data
+            </div>
+          </h5>
+          <%= link_to @policy, method: :delete, data: {confirm: "Are you sure you want to delete this policy?"}, class:'ui inverted right floated red basic button' do %>
+            <i class="icon trash"></i>
+            Delete this policy
+          <% end %>
+        </div>
+
+      </div>
+  </div>
+
+</div>

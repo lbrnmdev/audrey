@@ -3,6 +3,15 @@
     <div class="five wide column">
       <!-- policy card -->
       <%= render @policy %>
+
+      <!-- issue/cancel policy -->
+      <% if @policy.not_issued? %>
+        <%= link_to "Issue policy", policy_path(@policy, :policy => {status:"issued", issue_date:Date.today}), :method => :put, class: "ui positive fluid large button" %>
+      <% elsif @policy.issued? %>
+        <%= link_to "Cancel policy", policy_path(@policy, :policy => {status:"cancelled"}), :method => :put, data: {:confirm => "Are you sure?\nNote: This does NOT delete the policy"}, class: "ui basic negative fluid large button" %>
+      <% elsif @policy.cancelled? %>
+        <%= link_to "Re-Issue policy", policy_path(@policy, :policy => {status:"issued", issue_date:Date.today}), :method => :put, data: {:confirm => 'This sets the policy issue date to TODAY. Proceed?'}, class: "ui positive fluid large button" %>
+      <% end %>
     </div>
 
     <div class="eleven wide column">

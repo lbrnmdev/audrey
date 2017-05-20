@@ -1,5 +1,5 @@
 class PoliciesController < ApplicationController
-  before_action :set_policy, only: [:show]
+  before_action :set_policy, only: [:show, :edit, :update, :destroy]
 
   def index
     @policies = current_user.policies
@@ -20,6 +20,25 @@ class PoliciesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
+  end
+
+  def update
+    if @policy.update_attributes policy_params
+      flash[:success] = "Policy info updated!"
+      redirect_to @policy
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    client = @policy.client
+    @policy.destroy
+    flash[:success] = "Policy belonging to #{client.other_names_lastname} deleted!"
+    redirect_to client
   end
 
   private

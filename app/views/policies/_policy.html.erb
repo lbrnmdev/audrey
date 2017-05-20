@@ -9,7 +9,7 @@
       <%= @policy.number %>
     </div>
     <div class="meta">
-      <span><%= @policy.policy_type.capitalize %> policy</span>
+      <span><%= @policy.policy_type.capitalize + " policy " if @policy.policy_type %></span>
     </div>
   </div>
 
@@ -18,9 +18,13 @@
       <div class="item">
         <i class="car middle aligned icon"></i>
         <div class="content">
-          <%= link_to @policy.vehicle.registration_no, @policy.vehicle, class: 'header' %>
-          <%= link_to @policy.vehicle, class:'description' do %>
-            <em><%= @policy.vehicle.year_of_manufacture %> <%= @policy.vehicle.make %> <%= @policy.vehicle.model %></em>
+          <% if @policy.vehicle %>
+            <%= link_to @policy.vehicle.registration_no, @policy.vehicle, class: 'header' %>
+            <%= link_to @policy.vehicle, class:'description' do %>
+              <em><%= @policy.vehicle.year_of_manufacture %> <%= @policy.vehicle.make %> <%= @policy.vehicle.model %></em>
+            <% end %>
+          <% else %>
+            <h4>No vehicle</h4>
           <% end %>
         </div>
       </div>
@@ -56,7 +60,7 @@
 
   <div class="extra content">
     <span class="right floated">
-      <%= @policy.issued? ? "Issued #{@policy.issue_date.to_s :rfc822}" : @policy.status %>
+      <%= @policy.issued? ? "Issued #{@policy.issue_date.to_s :rfc822}" : @policy.status.humanize %>
     </span>
   </div>
 </div>

@@ -4,7 +4,7 @@ class Policy < ApplicationRecord
   belongs_to :user
   enum status: [ :not_issued, :issued, :cancelled ]
 
-  before_validation :squish_inputs  # remove whitespace
+  before_validation :squish_inputs, :nil_if_blank  # remove whitespace
 
   validates_uniqueness_of :number, scope: :user_id  # There HAS to be a more elegant way of doing this. Currently replaced has_many :through relationship between policy and user with has_many & belongs_to
   validates_presence_of :number, allow_nil: true # TODO validate number to disallow whitespace only input
@@ -20,6 +20,12 @@ class Policy < ApplicationRecord
     def squish_inputs
       self.attributes.each do |key, value|
         self[key] = value.squish if value.respond_to?("squish")
+      end
+    end
+
+    def nil_if_blank
+      self.attributes.each do |key, value|
+        self[key] = nil if (value.respond_to?("blank?") && value.blank?)
       end
     end
 end

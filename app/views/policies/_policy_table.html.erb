@@ -10,7 +10,7 @@
 
   <% policies.each do |policy| %>
     <tr>
-      <td class="selectable"><%= link_to policy.number, policy %></td>
+      <td class="selectable"><%= policy.number ? (link_to policy.number, policy) : (link_to "Policy number not issued", policy) %></td>
       <td class="selectable"><%= link_to "#{policy.vehicle ? policy.vehicle.registration_no : "--"}", '#' %></td>
       <td class="selectable"><%= link_to "insurance company", '#' %></td>
       <td class="selectable"><%= link_to policy.status, policy %></td>

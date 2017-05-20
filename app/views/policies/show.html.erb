@@ -7,7 +7,7 @@
 
     <div class="eleven wide column">
       <h2 class="ui dividing header">
-        Policy: <%= @policy.number %>
+        Policy: <%= @policy.number ? @policy.number : "Policy number not yet issued" %>
       </h2>
     </div>
   </div>

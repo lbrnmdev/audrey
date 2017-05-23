@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :vehicles
   resources :clients
   resources :policies
+  resources :insurers
 
   devise_for :users
 

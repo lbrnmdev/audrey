@@ -52,5 +52,18 @@
         <% end %>
       </div>
     </div>
+    <div class="item">
+      <div class="header">insurers</div>
+      <div class="menu">
+        <%= link_to insurers_path, class: 'item' do %>
+          <i class="building icon"></i>
+          list all
+        <% end %>
+        <%= link_to new_insurer_path, class: 'item' do %>
+          <i class="building outline icon"></i>
+          new insurer
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

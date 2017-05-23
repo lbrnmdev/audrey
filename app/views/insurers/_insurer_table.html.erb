@@ -1,0 +1,19 @@
+<table class="ui unstackable fixed single line selectable teal table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th class="right aligned">Phone</th>
+    </tr>
+  </thead>
+
+  <% @insurers.each do |insurer| %>
+    <tr>
+      <td class="selectable"><%= link_to insurer.name, insurer %></td>
+      <td><%= insurer.address %></td>
+      <td><%= insurer.email_address %></td>
+      <td class="right aligned"><%= insurer.phone_number %></td>
+    </tr>
+  <% end %>
+</table>

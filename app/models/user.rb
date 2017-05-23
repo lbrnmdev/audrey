@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :vehicles, through: :clients
   # has_many :policies, through: :clients
   has_many :policies
+  has_many :insurers
 end

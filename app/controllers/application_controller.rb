@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     # TODO refactor to use metaprogramming
     # TODO does this present problems when vehicle.client != policy.client ?
     def check_user_authorization_for resource
-      if resource.class.to_s == 'Vehicle' || resource.class.to_s == 'Policy'
+      if resource.class.to_s == 'Vehicle' || resource.class.to_s == 'Policy' # TODO should be checking policy against user directly?
         compare_current_user_to resource.client.user
       else
         compare_current_user_to resource.user

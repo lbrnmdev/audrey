@@ -1,0 +1,64 @@
+<div class="ui grid container">
+
+  <div class="row">
+    <div class="sixteen wide mobile eight wide tablet eight wide computer column">
+
+      <div class="ui header">
+        <i class="building icon"></i>
+        <div class="content">
+          Add Insurer
+          <div class="sub header">
+            Add a new insurance company
+          </div>
+        </div>
+      </div>
+
+      <!-- form -->
+      <%= form_for(@insurer, html: { class: 'ui form' }) do |f| %>
+
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <div class="field <%= "error" if @insurer.errors.details.key? :name %>">
+          <%= f.label :name, "Short name" %>
+          <%= f.text_field :name, autofocus: true, placeholder: "shortened company name, eg. \'SIC\'" %>
+        </div>
+
+        <div class="field <%= "error" if @insurer.errors.details.key? :full_legal_name %>">
+          <%= f.label :full_legal_name %>
+          <%= f.text_field :full_legal_name, autofocus: true, placeholder: "full company name, eg. \'SIC Insurance Company\'" %>
+        </div>
+
+        <div class="field <%= "error" if @insurer.errors.details.key? :address %>">
+          <%= f.label :address %>
+          <div class="ui left icon input">
+            <i class="building icon"></i>
+            <%= f.text_field :address, autofocus: true, placeholder: 'street or post address' %> <!-- TODO seperate into two separate addresses? also sanitize-->
+          </div>
+        </div>
+
+        <div class="field <%= "error" if @insurer.errors.details.key? :email_address %>">
+          <%= f.label :email_address, "Email" %>
+          <div class="ui left icon input">
+            <i class="mail icon"></i>
+            <%= f.email_field :email_address, autofocus: true, placeholder: 'email address' %>
+          </div>
+        </div>
+
+        <div class="field <%= "error" if @insurer.errors.details.key? :phone_number %>">
+          <%= f.label :phone_number, "Phone" %>
+          <div class="ui left icon input">
+            <i class="call icon"></i>
+            <%= f.telephone_field :phone_number, autofocus: true, placeholder: 'phone number' %>
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Add Insurer", class: "ui fluid large teal submit button" %>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+
+</div>

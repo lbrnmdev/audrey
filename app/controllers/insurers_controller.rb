@@ -8,6 +8,10 @@ class InsurersController < ApplicationController
   def show
   end
 
+  def new
+    @insurer = current_user.insurers.new
+  end
+
   private
 
     def set_insurer

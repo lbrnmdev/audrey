@@ -1,5 +1,5 @@
 class InsurersController < ApplicationController
-  before_action :set_insurer, only: [:show]
+  before_action :set_insurer, only: [:show, :edit, :update]
 
   def index
     @insurers = current_user.insurers
@@ -19,6 +19,18 @@ class InsurersController < ApplicationController
       redirect_to @insurer
     else
       render 'new'
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @insurer.update_attributes insurer_params
+      flash[:success] = "Insurer info updated!"
+      redirect_to @insurer
+    else
+      render 'edit'
     end
   end
 

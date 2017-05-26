@@ -1,5 +1,5 @@
 class InsurersController < ApplicationController
-  before_action :set_insurer, only: [:show, :edit, :update]
+  before_action :set_insurer, only: [:show, :edit, :update, :destroy]
 
   def index
     @insurers = current_user.insurers
@@ -32,6 +32,13 @@ class InsurersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    insurer_name = @insurer.full_legal_name
+    @insurer.destroy
+    flash[:success] = "#{insurer_name} has been deleted"
+    redirect_to insurers_path
   end
 
   private

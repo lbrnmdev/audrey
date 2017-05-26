@@ -69,12 +69,12 @@
           Delete Insurer
           <div class="sub header">
             This action permanently removes this insurer from the database.
-            You will lose all related policy data
+            You will lose all related insurer data
           </div>
         </h5>
         <%= link_to @insurer, method: :delete, data: {confirm: "Are you sure you want to delete this insurer?"}, class:'ui inverted right floated red basic button' do %>
           <i class="icon trash"></i>
-          Delete this policy
+          Delete this insurer
         <% end %>
       </div>
 

@@ -1,4 +1,5 @@
 class Policy < ApplicationRecord
+  include Sanitizable
   belongs_to :client
   belongs_to :vehicle, optional: true
   belongs_to :user
@@ -13,19 +14,4 @@ class Policy < ApplicationRecord
   validates :premium, presence: true, numericality: { greater_than_or_equal_to: 0, message: "must be number 0 or greater" }
   validates :commission, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, message: "must be a percentage between 0 and 100" }
   validates :discount, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, message: "must be a percentage between 0 and 100" }
-
-  private
-
-    # remove leading, trailing and excess whitespace
-    def squish_inputs
-      self.attributes.each do |key, value|
-        self[key] = value.squish if value.respond_to?("squish")
-      end
-    end
-
-    def nil_if_blank
-      self.attributes.each do |key, value|
-        self[key] = nil if (value.respond_to?("blank?") && value.blank?)
-      end
-    end
 end

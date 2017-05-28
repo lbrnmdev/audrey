@@ -1,7 +1,8 @@
 class Insurer < ApplicationRecord
+  include Sanitizable
   belongs_to :user
 
-  before_validation :downcase_attributes
+  before_validation :downcase_attributes, :nil_if_blank, :squish_inputs
 
   # TODO validations
   validates :name, presence: true, uniqueness: { scope: :user, message: "already exists" }
@@ -9,10 +10,4 @@ class Insurer < ApplicationRecord
   validates :address, presence: :true, allow_nil: :true
   validates :email_address, presence: :true, allow_nil: :true
   validates :phone_number, presence: :true, allow_nil: :true
-
-  private
-
-    def downcase_attributes
-      self.attributes.each {|attribute, value| self[attribute] = value.downcase if value.respond_to? 'downcase'}
-    end
 end

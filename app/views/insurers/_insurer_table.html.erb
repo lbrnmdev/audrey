@@ -10,10 +10,10 @@
 
   <% @insurers.each do |insurer| %>
     <tr>
-      <td class="selectable"><%= link_to insurer.name, insurer %></td>
-      <td><%= insurer.address %></td>
+      <td class="selectable"><%= link_to insurer.name.upcase, insurer %></td>
+      <td><%= insurer.address.titleize %></td>
       <td><%= insurer.email_address %></td>
-      <td class="right aligned"><%= insurer.phone_number %></td>
+      <td class="right aligned"><%= insurer.phone_number.upcase if insurer.phone_number %></td>
     </tr>
   <% end %>
 </table>

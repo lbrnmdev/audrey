@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :clients
   has_many :vehicles, through: :clients
   # has_many :policies, through: :clients
-  has_many :policies
-  has_many :insurers
+  has_many :policies, inverse_of: :user
+  has_many :insurers, inverse_of: :user
 end

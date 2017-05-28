@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528020601) do
+ActiveRecord::Schema.define(version: 20170528103949) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "lastname"
@@ -53,8 +53,10 @@ ActiveRecord::Schema.define(version: 20170528020601) do
     t.integer  "client_id"
     t.integer  "vehicle_id"
     t.integer  "user_id"
+    t.integer  "insurer_id"
     t.index ["client_id"], name: "index_policies_on_client_id"
-    t.index ["number", "user_id"], name: "index_policies_on_number_and_user_id", unique: true
+    t.index ["insurer_id"], name: "index_policies_on_insurer_id"
+    t.index ["number", "insurer_id", "user_id"], name: "index_policies_on_number_and_insurer_id_and_user_id", unique: true
     t.index ["user_id"], name: "index_policies_on_user_id"
     t.index ["vehicle_id"], name: "index_policies_on_vehicle_id"
   end

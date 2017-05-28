@@ -18,6 +18,11 @@
 
           <%= render 'shared/error_messages', object: f.object %>
 
+          <div class="field <%= "error" if @policy.errors.details.key? :insurer %>">
+            <%= f.label :insurer %>
+            <%= f.collection_select :insurer_id, current_user.insurers.all, :id, :name_in_caps, {prompt: "Select the insurance company"}, {class: "ui search dropdown"} %>
+          </div>
+
           <div class="field <%= "error" if @policy.errors.details.key? :number %>">
             <%= f.label :number, 'Policy number' %>
             <%= f.text_field :number, autofocus: true %>

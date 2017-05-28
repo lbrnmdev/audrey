@@ -37,7 +37,7 @@
       <div class="item">
         <i class="building outline middle aligned icon"></i>
         <div class="content">
-          Insured by <b>Insurance Company</b>
+          Insured by <b><%= @policy.insurer ? link_to(@policy.insurer.name.upcase, @policy.insurer) : '--unavailable--' %></b>
         </div>
       </div>
       <div class="item">

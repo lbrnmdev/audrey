@@ -12,4 +12,9 @@ class Insurer < ApplicationRecord
   validates :email_address, presence: :true, allow_nil: :true
   validates :phone_number, presence: :true, allow_nil: :true
   validates :user, presence: :true
+
+  # return name in all caps
+  def name_in_caps
+    name.upcase
+  end
 end

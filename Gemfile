@@ -39,6 +39,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 # use devise for authentication
 gem 'devise'
+# use chartkick and groupdate for charts
+gem 'chartkick'
+gem 'groupdate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

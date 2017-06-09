@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'revenue/commissions'
+
   resources :vehicles
   resources :clients
   resources :policies

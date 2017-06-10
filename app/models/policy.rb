@@ -6,7 +6,7 @@ class Policy < ApplicationRecord
   belongs_to :insurer
   enum status: [ :not_issued, :issued, :cancelled ]
 
-  before_validation :squish_inputs, :nil_if_blank, :calculate_percentages # remove whitespace and make commission a fraction
+  before_validation :squish_inputs, :nil_if_blank, :calculate_percentages_and_commission_amount # remove whitespace and make commission a fraction
 
   validates_uniqueness_of :number, scope: [:insurer, :user], message: "must be unique to the given insurer"  # There HAS to be a more elegant way of doing this. Currently replaced has_many :through relationship between policy and user with has_many & belongs_to
   validates_presence_of :number, allow_nil: true # TODO validate number to disallow whitespace only input
@@ -18,11 +18,15 @@ class Policy < ApplicationRecord
   validates :client, presence: true
   validates :insurer, presence: true
   validates :user, presence: true
+  validates :commission_amount, numericality: { greater_than_or_equal_to: 0 }
 
   private
 
-    def calculate_percentages
+    def calculate_percentages_and_commission_amount
       self.commission = self.commission/100
       self.discount = self.discount/100 if self.discount
+      # TODO apply discount to premium
+      self.commission_amount = self.premium * self.commission
     end
+
 end

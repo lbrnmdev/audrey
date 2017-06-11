@@ -1,2 +1,99 @@
-<h1>Revenue#commissions</h1>
-<p>Find me in app/views/revenue/commissions.html.erb</p>
+<div class="ui container">
+  <!-- page header -->
+  <h1 class="ui header">
+    <i class="dollar icon"></i>
+    <div class="content">
+      Commission
+      <div class="sub header">
+        View commission statistics
+      </div>
+    </div>
+  </h1>
+
+  <!-- begin total revenue -->
+  <h3 class="ui horizontal divider header">
+    <i class="money icon"></i>
+    Total Revenue
+  </h3>
+
+  <div class="ui three statistics">
+    <div class="green statistic">
+      <div class="value">
+        <% if !current_user.policies.empty? %>
+          <%= number_to_currency(current_user.policies.where(created_at: Time.now.beginning_of_month..(Time.now.end_of_month)).sum(:commission_amount), unit: "₵") %>
+        <% else %>
+          --
+        <% end %>
+      </div>
+      <div class="label">
+        this month
+      </div>
+    </div>
+
+    <div class="green statistic">
+      <div class="value">
+        <% if !current_user.policies.empty? %>
+          <%= number_to_currency(current_user.policies.where(created_at: Time.now.beginning_of_year..(Time.now.end_of_year)).sum(:commission_amount), unit: "₵") %>
+        <% else %>
+          --
+        <% end %>
+      </div>
+      <div class="label">
+        this year
+      </div>
+    </div>
+
+    <div class="green statistic">
+      <div class="value">
+        <% if !current_user.policies.empty? %>
+          <%= number_to_currency(current_user.policies.sum(:commission_amount), unit: "₵") %>
+        <% else %>
+          --
+        <% end %>
+      </div>
+      <div class="label">
+        all time
+      </div>
+    </div>
+  </div>
+  <!-- end total revenue -->
+
+  <!-- begin revenue per insurer -->
+  <h3 class="ui horizontal divider header">
+    <i class="bar chart icon"></i>
+    Revenue per Insurer
+  </h3>
+
+  <!-- revenue per insurer line chart -->
+  <% if !current_user.insurers.empty? %>
+  <%= line_chart current_user.insurers.map {  |insurer|
+    { name: insurer.name.capitalize, data: insurer.policies.group_by_month(:created_at).sum(:commission_amount) }
+  }, ytitle:"Commission (₵)", legend:"bottom" %>
+  <% else %>
+    <%= line_chart [], ytitle:"Commission (₵)", legend:"bottom" %>
+  <% end %>
+
+
+  <table class="ui celled unstackable structured table">
+    <thead>
+      <tr>
+        <th rowspan="2">Insurer</th>
+        <th class="center aligned" colspan="2">Commission</th>
+      </tr>
+      <tr>
+        <th class="center aligned">This month (<%= I18n.t("date.month_names")[Date.today.month] %>)</th>
+        <th class="center aligned">This year (<%= Date.today.year %>)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.insurers.each do |insurer| %>
+        <tr>
+          <td><%= link_to insurer.name.capitalize, insurer %></td>
+          <td class="right aligned"><%= number_to_currency(insurer.policies.where(created_at: Time.now.beginning_of_month..(Time.now.end_of_month)).sum(:commission_amount), unit: "₵") %></td>
+          <td class="right aligned"><%= number_to_currency(insurer.policies.where(created_at: Time.now.beginning_of_year..(Time.now.end_of_year)).sum(:commission_amount), unit: "₵") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <!-- end revenue per insurer -->
+</div>

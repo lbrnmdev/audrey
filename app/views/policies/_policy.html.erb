@@ -49,9 +49,9 @@
       <div class="item">
         <i class="money middle aligned icon"></i>
         <div class="content">
-          <a class="header"><%= number_to_currency(@policy.commission  * @policy.premium) %> commission</a>
+          <a class="header"><%= number_to_currency((@policy.commission/100)  * @policy.premium) %> commission</a>
           <div class="description">
-            <em><%= @policy.commission * 100 %>% of <%= number_to_currency(@policy.premium) %> premium</em>
+            <em><%= @policy.commission %>% of <%= number_to_currency(@policy.premium) %> premium</em>
           </div>
         </div>
       </div>

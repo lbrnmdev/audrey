@@ -1,14 +1,108 @@
 <div class="ui internally celled stackable grid container">
   <div class="row">
     <div class="five wide column">
-      <!-- insurer card -->
+      <!-- begin insurer card -->
       <%= render @insurer %>
+      <!-- end insurer card -->
+      <%= link_to insurers_path, class:'ui animated fade fluid teal basic button' do %>
+        <div class="visible content">
+          <i class="building icon"></i>
+          insurers
+        </div>
+        <div class="hidden content">
+          go to Insurer list
+        </div>
+      <% end %>
     </div>
 
     <div class="eleven wide column">
-      <h2 class="ui dividing header">
-        <%= @insurer.full_legal_name.titleize %>
-      </h2>
+      <!-- begin revenue info -->
+      <h3 class="ui horizontal divider header">
+        <i class="dollar icon"></i>
+        Commission Revenue
+      </h3>
+
+      <div class="ui stackable grid container">
+        <div class="six wide column">
+          <div class="ui horizontal statistics">
+            <div class="olive statistic">
+              <div class="value">
+                <% if !@insurer.policies.empty? %>
+                  <%= number_to_currency(@insurer.policies.where(created_at: Time.now.beginning_of_week..(Time.now.end_of_week)).sum(:commission_amount), unit: "GH₵") %>
+                <% else %>
+                  --
+                <% end %>
+              </div>
+              <div class="label">
+                this week
+              </div>
+            </div>
+            <div class="green statistic">
+              <div class="value">
+                <% if !@insurer.policies.empty? %>
+                  <%= number_to_currency(@insurer.policies.where(created_at: Time.now.beginning_of_month..(Time.now.end_of_month)).sum(:commission_amount), unit: "GH₵") %>
+                <% else %>
+                  --
+                <% end %>
+              </div>
+              <div class="label">
+                this month
+              </div>
+            </div>
+            <div class=" teal statistic">
+              <div class="value">
+                <% if !@insurer.policies.empty? %>
+                  <%= number_to_currency(@insurer.policies.where(created_at: Time.now.beginning_of_year..(Time.now.end_of_year)).sum(:commission_amount), unit: "GH₵") %>
+                <% else %>
+                  --
+                <% end %>
+              </div>
+              <div class="label">
+                this year
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="one wide column">
+          <!-- gutter -->
+        </div>
+        <div class="nine wide column">
+          <% if !@insurer.policies.empty? %>
+            <%= line_chart @insurer.policies.group_by_day(:created_at).sum(:commission_amount), ytitle:"GH₵" %>
+          <% else %>
+            <%= line_chart [], ytitle:"GH₵" %>
+          <% end %>
+        </div>
+      </div>
+      <!-- end revenue info -->
+
+      <!-- begin policies info -->
+      <h3 class="ui horizontal divider header">
+        <i class="file text icon"></i>
+        Policies
+      </h3>
+
+      <% if !@insurer.policies.empty? %>
+        <table class="ui unstackable very basic selectable table">
+          <thead>
+            <tr>
+              <th>Policy No.</th>
+              <th>Asset</th>
+              <th>Status</th>
+              <th class="right aligned">Commission</th>
+            </tr>
+          </thead>
+          <% @insurer.policies.each do |policy| %>
+            <tr>
+              <td class="selectable"><%= policy.number ? (link_to policy.number, policy) : (link_to "Policy number not issued", policy) %></td>
+              <td class="selectable"><%= link_to "#{policy.vehicle ? policy.vehicle.registration_no : "--"}", policy.vehicle %></td>
+              <td><%= policy.status %></td>
+              <td class="right aligned"><%= number_to_currency policy.commission_amount, unit:"GH₵" %></td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+      <!-- end policies info -->
     </div>
   </div>
 </div>

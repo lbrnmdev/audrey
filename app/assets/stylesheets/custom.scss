@@ -9,6 +9,11 @@ body {
     padding-top: 70px
   }
 
+  // add padding between flash messages and page content
+  .flash.container {
+    padding-bottom: 15px
+  }
+
   // for logo on inverted backgrounds
   .image.reversed {
     filter: invert(100%);

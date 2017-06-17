@@ -3,10 +3,70 @@
     <div class="five wide column">
       <!-- vehicle card -->
       <%= render @vehicle %>
+
+      <!-- go back to policy list -->
+      <%= link_to vehicles_path, class:'ui animated fade fluid teal basic button' do %>
+        <div class="visible content">
+          <i class="car icon"></i>
+          vehicles
+        </div>
+        <div class="hidden content">
+          go to Vehicle list
+        </div>
+      <% end %>
     </div>
+
     <div class="eleven wide column">
-      <!-- policies -->
-      <!-- claims -->
+
+      <h2 class="ui left floated header">
+        <div class="content">
+          <%= @vehicle.registration_no %>
+          <div class="sub header">
+            <i>registration number</i>
+          </div>
+        </div>
+      </h2>
+
+      <div class="ui clearing divider"></div>
+
+      <!-- make this vary color depending on policy status -->
+      <div class="ui center aligned clearing segment">
+        <h3 class="ui header">
+          This vehicle is currently <%= @vehicle.policies.where(status: 1).empty? ? "not covered" : "covered under a policy expiring in ... days/months/years" %>
+        </h3>
+      </div>
+
+      <!-- begin policies -->
+      <table class="ui unstackable selectable teal table">
+        <thead>
+          <tr>
+            <th colspan="3" class="center aligned"><%=@vehicle.registration_no%>'s policies</th>
+          </tr>
+          <tr>
+            <th>Policy No.</th>
+            <th>Insurer</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <% if @vehicle.policies.any? %>
+          <% @vehicle.policies.each do |policy| %>
+            <tr>
+              <td class="selectable"><%= policy.number ? (link_to policy.number, policy) : (link_to "Policy number not issued", policy) %></td>
+              <td class="selectable"><%= policy.insurer ? link_to(policy.insurer.name.upcase, policy.insurer) : '--unavailable--' %></td>
+              <td class="selectable"><%= link_to policy.status, policy %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
+      <!-- end policies -->
+
+      <!-- begin claims -->
+      <!-- end claims -->
+
+      <!-- begin revenue -->
+        
+      <!-- end revenue -->
     </div>
   </div>
 </div>

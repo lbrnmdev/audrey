@@ -4,20 +4,39 @@
       <!-- policy card -->
       <%= render @policy %>
 
-      <!-- issue/cancel policy -->
-      <% if @policy.not_issued? %>
-        <%= link_to "Issue policy", policy_path(@policy, :policy => {status:"issued", issue_date:Date.today}), :method => :put, class: "ui positive fluid large button" %>
-      <% elsif @policy.issued? %>
-        <%= link_to "Cancel policy", policy_path(@policy, :policy => {status:"cancelled"}), :method => :put, data: {:confirm => "Are you sure?\nNote: This does NOT delete the policy"}, class: "ui basic negative fluid large button" %>
-      <% elsif @policy.cancelled? %>
-        <%= link_to "Re-Issue policy", policy_path(@policy, :policy => {status:"issued", issue_date:Date.today}), :method => :put, data: {:confirm => 'This sets the policy issue date to TODAY. Proceed?'}, class: "ui positive fluid large button" %>
+      <!-- go back to policy list -->
+      <%= link_to policies_path, class:'ui animated fade fluid teal basic button' do %>
+        <div class="visible content">
+          <i class="open folder icon"></i>
+          policies
+        </div>
+        <div class="hidden content">
+          go to Policy list
+        </div>
       <% end %>
     </div>
 
     <div class="eleven wide column">
-      <h2 class="ui dividing header">
+
+      <!-- policy number header -->
+      <h2 class="ui left floated header">
         Policy: <%= @policy.number ? @policy.number : "Policy number not yet issued" %>
       </h2>
+      <!-- policy action button header -->
+      <% if @policy.not_issued? %>
+        <%= link_to "Issue policy", policy_path(@policy, :policy => {status:"issued", issue_date:Date.today}), :method => :put, class: "ui positive right floated button" %>
+      <% elsif @policy.issued? %>
+        <%= link_to "Cancel policy", policy_path(@policy, :policy => {status:"cancelled"}), :method => :put, data: {:confirm => "Are you sure?\nNote: This does NOT delete the policy"}, class: "ui basic negative right floated button" %>
+      <% elsif @policy.cancelled? %>
+        <%= link_to "Re-Issue policy", policy_path(@policy, :policy => {status:"issued", issue_date:Date.today}), :method => :put, data: {:confirm => 'This sets the policy issue date to TODAY. Proceed?'}, class: "ui positive right floated button" %>
+      <% end %>
+
+      <div class="ui clearing divider"></div>
+
+      <!-- if policy has assets -->
+
+      <!-- if policy has claims -->
+
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ class Policy < ApplicationRecord
   belongs_to :vehicle, optional: true
   belongs_to :user
   belongs_to :insurer
-  enum status: [ :not_issued, :issued, :cancelled ]
+  enum status: [ :not_issued, :issued, :cancelled ] # TODO add expired, valid
 
   before_validation :squish_inputs, :nil_if_blank, :calculate_commission_amount # remove whitespace, calculate commission amount
 

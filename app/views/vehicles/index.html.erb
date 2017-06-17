@@ -1,6 +1,6 @@
 <div class="ui container">
   <!-- page header -->
-  <h1 class="ui header">
+  <h1 class="ui left floated header">
     <i class="car icon"></i>
     <div class="content">
       Vehicles
@@ -9,6 +9,12 @@
       </div>
     </div>
   </h1>
+
+  <%= link_to new_vehicle_path do %>
+    <div class="ui teal circular basic icon large button right floated" data-tooltip="add new vehicle" data-inverted="" data-position="bottom center">
+      <i class="plus icon"></i>
+    </div>
+  <% end %>
 
   <!-- vehicle list -->
   <%= render(@vehicles.any? ? 'vehicle_table' : 'no_vehicles') %>

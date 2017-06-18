@@ -1,22 +1,20 @@
 <div class="ui container">
   <!-- page header -->
-  <div class="ui basic clearing segment">
-    <%= link_to new_insurer_path do %>
-      <div class="ui teal circular basic icon large button right floated" data-tooltip="add new insurer" data-inverted="" data-position="bottom center">
-        <i class="plus icon"></i>
-      </div>
-    <% end %>
+  <%= link_to new_insurer_path do %>
+    <div class="ui teal circular basic icon large button right floated" data-tooltip="add new insurer" data-inverted="" data-position="bottom center">
+      <i class="plus icon"></i>
+    </div>
+  <% end %>
 
-    <h1 class="ui left floated header">
-      <i class="building icon"></i>
-      <div class="content">
-        Insurers
-        <div class="sub header">
-          View all insurers
-        </div>
+  <h1 class="ui left floated header">
+    <i class="building icon"></i>
+    <div class="content">
+      Insurers
+      <div class="sub header">
+        View all insurers
       </div>
-    </h1>
-  </div>
+    </div>
+  </h1>
 
   <!-- insurer list -->
   <%= render(@insurers.any? ? 'insurer_table' : 'no_insurers') %>

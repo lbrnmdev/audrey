@@ -6,6 +6,17 @@
       <%= render @client %>
       <!-- end client card -->
 
+      <!-- go back to client list -->
+      <%= link_to clients_path, class:'ui animated fade fluid teal basic button' do %>
+        <div class="visible content">
+          <i class="users icon"></i>
+          clients
+        </div>
+        <div class="hidden content">
+          go to Client list
+        </div>
+      <% end %>
+
     </div>
 
     <div class="eleven wide column">

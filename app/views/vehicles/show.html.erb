@@ -65,7 +65,54 @@
       <!-- end claims -->
 
       <!-- begin revenue -->
-        
+        <h3 class="ui horizontal divider header">
+          <i class="dollar icon"></i>
+          Commission Revenue
+        </h3>
+        <div class="ui stackable grid container">
+          <div class="six wide column">
+            <div class="ui horizontal statistics">
+              <!-- amount made from currently valid (issued, non-expired) policies -->
+              <div class="green statistic">
+                <div class="value">
+                  <% if @vehicle.policies.any? %>
+                    <%= number_to_currency(@vehicle.policies.where(status:1).sum(:commission_amount), unit:"GH₵") %>
+                  <% else %>
+                    --
+                  <% end %>
+                </div>
+                <div class="label">
+                  from current policies
+                </div>
+              </div>
+              <!-- cumulative amount made from valid (issued, expired included) policies -->
+              <div class="olive statistic">
+                <div class="value">
+                  <% if @vehicle.policies.any? %>
+                    <!-- TODO introduce helper method to select policies that meet above criteria -->
+                    <%= number_to_currency(@vehicle.policies.sum(:commission_amount), unit:"GH₵") %>
+                  <% else %>
+                    --
+                  <% end %>
+                </div>
+                <div class="label">
+                  cumulative past & present
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="one wide column">
+            <!-- gutter -->
+          </div>
+          <div class="nine wide column">
+            <% if @vehicle.policies.any? %>
+              <!-- TODO modify this to display value on chart in currency format -->
+              <%= line_chart @vehicle.policies.group_by_hour(:created_at).sum(:commission_amount), ytitle:"GH₵" %>
+            <% else %>
+              <%= line_chart [], ytitle:"GH₵" %>
+            <% end %>
+          </div>
+        </div>
       <!-- end revenue -->
     </div>
   </div>

@@ -19,4 +19,9 @@ module ApplicationHelper
         info: "info circle icon"
     }[flash_type.to_sym] || 'pointing up icon'
   end
+
+  # render error label partial by providing model object and the required form field
+  def render_error_label object, field
+    render('shared/error_label', object: object, field: field) if object.errors.include?(field)
+  end
 end

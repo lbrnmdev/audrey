@@ -13,76 +13,7 @@
           </div>
         </div>
 
-        <!-- form -->
-        <%= form_for(@policy, html: { class: 'ui form' }) do |f| %>
-
-          <%= render 'shared/error_messages', object: f.object %>
-
-          <div class="field <%= "error" if @policy.errors.details.key? :insurer %>">
-            <%= f.label :insurer %>
-            <%= f.collection_select :insurer_id, current_user.insurers.all, :id, :name_in_caps, {prompt: "Select the insurance company"}, {class: "ui search dropdown"} %>
-          </div>
-
-          <div class="field <%= "error" if @policy.errors.details.key? :number %>">
-            <%= f.label :number, 'Policy number' %>
-            <%= f.text_field :number, autofocus: true %>
-          </div>
-
-          <div class="field <%= "error" if @policy.errors.details.key? :policy_type %>">
-            <%= f.label :policy_type %>
-            <%= f.text_field :policy_type, autofocus: true %>
-          </div>
-
-          <div class="field">
-            <%= f.label :start_date %>
-            <div class="three fields">
-              <!-- TODO Sort out error rendering for wrapping field div which is added by jquery in policies.coffee -->
-              <%= f.date_select :start_date, { prompt:{ day:'Start day', month:'Start month', year:'Start year' } }, { class:'ui dropdown compact for_date' } %>
-            </div>
-          </div>
-
-          <div class="field">
-            <%= f.label :end_date %>
-            <div class="three fields">
-              <!-- TODO Sort out error rendering for wrapping field div which is added by jquery in policies.coffee -->
-              <%= f.date_select :end_date, { prompt:{ day:'End day', month:'End month', year:'End year' } }, { class:'ui dropdown compact for_date' } %>
-            </div>
-          </div>
-
-          <div class="three fields">
-            <div class="field <%= "error" if @policy.errors.details.key? :premium %>">
-              <%= f.label :premium %>
-              <%= f.number_field :premium, step: 0.01, autofocus: true %>
-            </div>
-            <div class="field <%= "error" if @policy.errors.details.key? :commission %>">
-              <%= f.label :commission, 'Commission (%)' %>
-              <%= f.number_field :commission, step: 0.001, autofocus: true %>
-            </div>
-            <div class="field <%= "error" if @policy.errors.details.key? :discount %>">
-              <%= f.label :discount, 'Discount (%)' %>
-              <%= f.number_field :discount, step: 0.001, autofocus: true %>
-            </div>
-          </div>
-
-          <div class="field <%= "error" if @policy.errors.details.key? :client %>">
-            <%= f.label :client %>
-            <%= f.collection_select :client_id, current_user.clients.all, :id, :lastname_other_names, {prompt: "Select the vehicle owner"}, {class: "ui search dropdown"} %>
-          </div>
-
-          <div class="field <%= "error" if @policy.errors.details.key? :vehicle %>">
-            <%= f.label :vehicle %>
-            <%= f.collection_select :vehicle_id, current_user.vehicles.all, :id, :reg_make_model, {prompt: "Select the vehicle"}, {class: "ui search dropdown"} %>
-          </div>
-
-          <div class="actions">
-            <div class="two ui buttons">
-              <%= link_to 'Cancel', @policy, class:'ui button' %>
-              <div class="or"></div>
-              <%= f.submit "Save changes", class: "ui positive button" %>
-            </div>
-          </div>
-
-        <% end %>
+        <%= render 'policy_form', policy: @policy %>
 
         <div class="ui divider"></div>
 

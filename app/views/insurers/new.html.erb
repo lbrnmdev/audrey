@@ -52,6 +52,14 @@
           </div>
         </div>
 
+        <div class="field <%= "error" if @insurer.errors.details.key? :website %>">
+          <%= f.label :website %>
+          <div class="ui left icon input">
+            <i class="world icon"></i>
+            <%= f.text_field :website, autofocus: true, placeholder: "eg. \'www.sic-gh.com\'" %>
+          </div>
+        </div>
+
         <div class="actions">
           <%= f.submit "Add Insurer", class: "ui fluid large teal submit button" %>
         </div>

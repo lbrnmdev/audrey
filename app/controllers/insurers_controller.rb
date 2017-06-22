@@ -49,6 +49,6 @@ class InsurersController < ApplicationController
     end
 
     def insurer_params
-      params.require(:insurer).permit(:name, :full_legal_name, :address, :email_address, :phone_number)
+      params.require(:insurer).permit(:name, :full_legal_name, :address, :email_address, :phone_number, :website)
     end
 end

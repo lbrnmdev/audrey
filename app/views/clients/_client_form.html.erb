@@ -1,0 +1,55 @@
+<!-- form -->
+<%= form_for(client, html: { class: 'ui form' }) do |f| %>
+
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="field">
+    <label>Name</label>
+    <div class="two fields">
+
+      <div class="field <%= "error" if client.errors.details.key? :lastname %>">
+        <%= f.text_field :lastname, autofocus: true, placeholder: 'lastname' %>
+        <%= render_error_label client, :lastname %>
+      </div>
+
+      <div class="field <%= "error" if client.errors.details.key? :other_names %>">
+        <%= f.text_field :other_names, autofocus: true, placeholder: 'other names' %>
+        <%= render_error_label client, :other_names %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="field <%= "error" if client.errors.details.key? :telephone %>">
+    <%= f.label :telephone %>
+    <div class="ui left icon input">
+      <i class="call icon"></i>
+      <%= f.telephone_field :telephone, autofocus: true, placeholder: 'phone #' %>
+    </div>
+    <%= render_error_label client, :telephone %>
+  </div>
+
+  <div class="field <%= "error" if client.errors.details.key? :email %>">
+    <%= f.label :email %>
+    <div class="ui left icon input">
+      <i class="mail icon"></i>
+      <%= f.email_field :email, autofocus: true, placeholder: 'email address' %>
+    </div>
+    <%= render_error_label client, :email %>
+  </div>
+
+  <div class="field <%= "error" if client.errors.details.key? :address %>">
+    <%= f.label :address %>
+    <%= f.text_area :address, autofocus: true, rows: 2 %>
+    <%= render_error_label client, :address %>
+  </div>
+
+  <div class="actions">
+    <div class="two ui buttons">
+      <%= link_to 'Cancel', (request.referer.present? ? request.referer : authenticated_root_path), class:'ui button' %>
+      <div class="or"></div>
+      <%= f.submit action, class: "ui positive button" %>
+    </div>
+  </div>
+
+<% end %>

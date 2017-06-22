@@ -13,52 +13,7 @@
         </div>
       </div>
 
-      <!-- form -->
-      <%= form_for(@client, html: { class: 'ui form' }) do |f| %>
-
-        <%= render 'shared/error_messages', object: f.object %>
-
-        <div class="field">
-          <label>Name</label>
-          <div class="two fields">
-
-            <div class="field <%= "error" if @client.errors.details.key? :lastname %>">
-              <%= f.text_field :lastname, autofocus: true, placeholder: 'lastname' %>
-            </div>
-
-            <div class="field <%= "error" if @client.errors.details.key? :other_names %>">
-              <%= f.text_field :other_names, autofocus: true, placeholder: 'other names' %>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="field <%= "error" if @client.errors.details.key? :telephone %>">
-          <%= f.label :telephone %>
-          <div class="ui left icon input">
-            <i class="call icon"></i>
-            <%= f.telephone_field :telephone, autofocus: true, placeholder: 'phone #' %>
-          </div>
-        </div>
-
-        <div class="field <%= "error" if @client.errors.details.key? :email %>">
-          <%= f.label :email %>
-          <div class="ui left icon input">
-            <i class="mail icon"></i>
-            <%= f.email_field :email, autofocus: true, placeholder: 'email address' %>
-          </div>
-        </div>
-
-        <div class="field <%= "error" if @client.errors.details.key? :address %>">
-          <%= f.label :address %>
-          <%= f.text_area :address, autofocus: true, rows: 2 %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "Add Client", class: "ui fluid large teal submit button" %>
-        </div>
-
-      <% end %>
+      <%= render 'client_form', client:@client, action:'Add Client' %>
 
     </div>
   </div>

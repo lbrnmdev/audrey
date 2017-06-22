@@ -68,7 +68,11 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Add policy", class: "ui fluid large teal submit button" %>
+    <div class="two ui buttons">
+      <%= link_to 'Cancel', (request.referer.present? ? request.referer : authenticated_root_path), class:'ui button' %>
+      <div class="or"></div>
+      <%= f.submit action, class: "ui positive button" %>
+    </div>
   </div>
 
 <% end %>

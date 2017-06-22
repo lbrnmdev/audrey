@@ -13,77 +13,7 @@
         </div>
       </div>
 
-      <!-- form -->
-      <%= form_for(@vehicle, html: { class: 'ui form' }) do |f| %>
-
-        <%= render 'shared/error_messages', object: f.object %>
-
-        <div class="three fields">
-          <!-- change to dropdown -->
-          <div class="field <%= "error" if @vehicle.errors.details.key? :make %>">
-            <%= f.label :make %>
-            <%= f.text_field :make, autofocus: true %>
-          </div>
-
-          <!-- change to dropdown -->
-          <div class="field <%= "error" if @vehicle.errors.details.key? :model %>">
-            <%= f.label :model %>
-            <%= f.text_field :model, autofocus: true %>
-          </div>
-
-          <div class="field <%= "error" if @vehicle.errors.details.key? :year_of_manufacture %>">
-            <%= f.label :year_of_manufacture, 'Year of Manufacture' %>
-            <%= f.select :year_of_manufacture, (1950..(Time.now.year+1)).to_a.reverse, {prompt: "Select year"}, {class: "ui fluid selection dropdown"}%>
-          </div>
-        </div>
-
-        <div class="three fields">
-          <!-- change to dropdown -->
-          <div class="field <%= "error" if @vehicle.errors.details.key? :body_type %>">
-            <%= f.label :body_type, 'Body Type' %>
-            <%= f.text_field :body_type, autofocus: true %>
-          </div>
-
-          <div class="field <%= "error" if @vehicle.errors.details.key? :seating_capacity %>">
-            <%= f.label :seating_capacity, 'Seating Capacity' %>
-            <!-- <%= f.number_field :seating_capacity, autofocus: true %> -->
-            <%= f.select :seating_capacity, (0..100).to_a, { prompt: "choose" }, { class: "ui fluid selection dropdown" } %>
-          </div>
-
-          <div class="field <%= "error" if @vehicle.errors.details.key? :cubic_capacity %>">
-            <%= f.label :cubic_capacity, "Cubic Capacity (cc)" %>
-            <%= f.number_field :cubic_capacity, autofocus: true %>
-          </div>
-        </div>
-
-        <div class="fields">
-          <div class="six wide field">
-            <div class="field <%= "error" if @vehicle.errors.details.key? :registration_no %>">
-              <%= f.label :registration_no, 'Registration Number' %>
-              <%= f.text_field :registration_no, autofocus: true %>
-            </div>
-          </div>
-
-          <div class="ten wide field">
-            <div class="field <%= "error" if @vehicle.errors.details.key? :chassis_no %>">
-              <%= f.label :chassis_no, 'Chassis Number' %>
-              <!-- length of chassis_no post 1981 is 17 characters -->
-              <%= f.text_field :chassis_no, maxlength: 17, size: 17, autofocus: true %>
-            </div>
-          </div>
-        </div>
-
-        <!-- change to dropdown -->
-        <div class="field <%= "error" if @vehicle.errors.details.key? :client %>">
-          <%= f.label :client %>
-          <!-- <%= f.text_field :client, autofocus: true %> -->
-          <%= f.collection_select :client_id, current_user.clients.all, :id, :lastname_other_names,{prompt: "Select the vehicle owner"}, {class: "ui search dropdown"} %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "Add Vehicle", class: "ui fluid large teal submit button" %>
-        </div>
-      <% end %>
+      <%= render 'vehicle_form', vehicle: @vehicle, action: 'Add Vehicle' %>
 
     </div>
   </div>

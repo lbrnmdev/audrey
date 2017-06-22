@@ -24,7 +24,7 @@ class Policy < ApplicationRecord
 
     def calculate_commission_amount
       # TODO apply discount to premium
-      self.commission_amount = self.premium * (self.commission/100)
+      self.commission_amount = (self.premium * (self.commission/100)) if self.commission
     end
 
 end

@@ -1,0 +1,62 @@
+<!-- form -->
+<%= form_for(insurer, html: { class: 'ui form' }) do |f| %>
+
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="field <%= "error" if insurer.errors.details.key? :name %>">
+    <%= f.label :name, "Short name" %>
+    <%= f.text_field :name, autofocus: true, placeholder: "shortened company name, eg. \'SIC\'" %>
+    <%= render_error_label insurer, :name %>
+  </div>
+
+  <div class="field <%= "error" if insurer.errors.details.key? :full_legal_name %>">
+    <%= f.label :full_legal_name %>
+    <%= f.text_field :full_legal_name, autofocus: true, placeholder: "full company name, eg. \'SIC Insurance Company\'" %>
+    <%= render_error_label insurer, :full_legal_name %>
+  </div>
+
+  <div class="field <%= "error" if insurer.errors.details.key? :address %>">
+    <%= f.label :address %>
+    <div class="ui left icon input">
+      <i class="building icon"></i>
+      <%= f.text_field :address, autofocus: true, placeholder: 'street or post address' %> <!-- TODO seperate into two separate addresses? also sanitize-->
+    </div>
+    <%= render_error_label insurer, :address %>
+  </div>
+
+  <div class="field <%= "error" if insurer.errors.details.key? :email_address %>">
+    <%= f.label :email_address, "Email" %>
+    <div class="ui left icon input">
+      <i class="mail icon"></i>
+      <%= f.email_field :email_address, autofocus: true, placeholder: 'email address' %>
+    </div>
+    <%= render_error_label insurer, :email_address %>
+  </div>
+
+  <div class="field <%= "error" if insurer.errors.details.key? :phone_number %>">
+    <%= f.label :phone_number, "Phone" %>
+    <div class="ui left icon input">
+      <i class="call icon"></i>
+      <%= f.telephone_field :phone_number, autofocus: true, placeholder: 'phone number' %>
+    </div>
+    <%= render_error_label insurer, :phone_number %>
+  </div>
+
+  <div class="field <%= "error" if insurer.errors.details.key? :website %>">
+    <%= f.label :website %>
+    <div class="ui left icon input">
+      <i class="world icon"></i>
+      <%= f.text_field :website, autofocus: true, placeholder: "eg. \'www.sic-gh.com\'" %>
+    </div>
+    <%= render_error_label insurer, :website %>
+  </div>
+
+  <div class="actions">
+    <div class="two ui buttons">
+      <%= link_to 'Cancel', (request.referer.present? ? request.referer : authenticated_root_path), class:'ui button' %>
+      <div class="or"></div>
+      <%= f.submit action, class: "ui positive button" %>
+    </div>
+  </div>
+
+<% end %>

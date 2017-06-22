@@ -13,17 +13,19 @@
         </div>
       </h4>
 
-      <div class="ui basic red segment">
-        <div class="ui bulleted list">
-          <% object.errors.messages.each do |field, messages| %>
-            <% messages.each do |msg| %>
-              <div class="item">
-                <b><em><%= field.to_s.humanize %></em></b> <%= msg %>
-              </div>
+      <% if false %> <!-- TODO fix BEGIN dirty block comment -->
+        <div class="ui basic red segment">
+          <div class="ui bulleted list">
+            <% object.errors.messages.each do |field, messages| %>
+              <% messages.each do |msg| %>
+                <div class="item">
+                  <b><em><%= field.to_s.humanize %></em></b> <%= msg %>
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
-      </div>
+      <% end %> <!-- TODO fix END dirty block comment -->
     </div>
   </div>
   <div class="ui hidden divider"></div>

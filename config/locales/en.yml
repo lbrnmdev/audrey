@@ -26,3 +26,6 @@ en:
       vehicle:
         registration_no: "Registration Number"
         chassis_no: "Chassis Number"
+    errors:
+      messages:
+        not_a_number: "must be a number"

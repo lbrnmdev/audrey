@@ -25,7 +25,8 @@
     <%= f.label :start_date %>
     <div class="three fields">
       <!-- TODO Sort out error rendering for wrapping field div which is added by jquery in policies.coffee -->
-      <%= f.date_select :start_date, { prompt:{ day:'Start day', month:'Start month', year:'Start year' } }, { class:'ui dropdown compact for_date' } %>
+      <%= f.date_select :start_date, { prompt:{ day:'Start day', month:'Start month', year:'Start year' } }, { class:"ui dropdown compact for_date #{"error" if policy.errors.details.key? :start_date}" } %>
+      <%= render_error_label policy, :start_date, '' %>
     </div>
   </div>
 
@@ -33,13 +34,14 @@
     <%= f.label :end_date %>
     <div class="three fields">
       <!-- TODO Sort out error rendering for wrapping field div which is added by jquery in policies.coffee -->
-      <%= f.date_select :end_date, { prompt:{ day:'End day', month:'End month', year:'End year' } }, { class:'ui dropdown compact for_date' } %>
+      <%= f.date_select :end_date, { prompt:{ day:'End day', month:'End month', year:'End year' } }, { class:"ui dropdown compact for_date #{"error" if policy.errors.details.key? :end_date}" } %>
+      <%= render_error_label policy, :end_date, '' %>
     </div>
   </div>
 
   <div class="three fields">
     <div class="field <%= "error" if policy.errors.details.key? :premium %>">
-      <%= f.label :premium %>
+      <%= f.label :premium, 'Premium (GHS)' %>
       <%= f.number_field :premium, step: 0.01, autofocus: true %>
       <%= render_error_label policy, :premium %>
     </div>
@@ -65,6 +67,53 @@
     <%= f.label :vehicle %>
     <%= f.collection_select :vehicle_id, current_user.vehicles.all, :id, :reg_make_model, {prompt: "Select the vehicle"}, {class: "ui search dropdown"} %>
     <%= render_error_label policy, :vehicle %>
+  </div>
+
+  <div class="ui segment">
+    <div class="ui teal ribbon label">
+      <i class="info circle icon"></i>
+      Validation
+    </div>
+    <div class="ui list">
+      <div class="item">
+        Date on which policy is issued. Commission revenue is calculated for this date.
+      </div>
+      <div class="item">
+        Default is today.
+      </div>
+    </div>
+    <div class="three fields">
+      <!-- TODO Sort out error rendering for wrapping field div which is added by jquery in policies.coffee -->
+      <%= f.date_select :issue_date, { default: Date.today }, { class:"ui dropdown compact for_date #{"error" if policy.errors.details.key? :issue_date}" } %>
+      <%= render_error_label policy, :issue_date, '' %>
+    </div>
+    <div class="ui list">
+      <div class="item">
+        Please select the policy status
+      </div>
+    </div>
+    <div id="status_selection" class="three fields">
+      <!--  TODO checkboxes from which user can select one of issue, cancelled or expired.
+            Expired is disabled by default and the remaining options are also disabled on policy expiration -->
+      <div class="field">
+        <div class="ui toggle checkbox">
+          <%= f.radio_button(:status, "issued")  %>
+          <%= f.label(:status, "ISSUED") %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui toggle checkbox">
+          <%= f.radio_button(:status, "cancelled")  %>
+          <%= f.label(:status, "CANCELLED") %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui disabled toggle checkbox">
+          <%= f.radio_button(:status, "expired", disabled:true)  %>
+          <%= f.label(:status, "EXPIRED") %>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="actions">

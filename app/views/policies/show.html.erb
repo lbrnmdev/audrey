@@ -22,13 +22,13 @@
       <h2 class="ui left floated header">
         Policy: <%= @policy.number ? @policy.number : "Policy number not yet issued" %>
       </h2>
-      <!-- policy action button header -->
+      <!-- policy action button header TODO add button for when policy is expired that links to policy dates part of policy form  -->
       <% if @policy.not_issued? %>
-        <%= link_to "Issue policy", policy_path(@policy, :policy => {status:"issued", issue_date:Date.today}), :method => :put, class: "ui positive right floated button" %>
+        <%= link_to "Issue policy", edit_policy_path(@policy, anchor: "status_selection"), data: { confirm: "This will take you to the Validation section of this policy's settings. Proceed?" }, class: "ui positive right floated button" %>
       <% elsif @policy.issued? %>
-        <%= link_to "Cancel policy", policy_path(@policy, :policy => {status:"cancelled"}), :method => :put, data: {:confirm => "Are you sure?\nNote: This does NOT delete the policy"}, class: "ui basic negative right floated button" %>
+        <%= link_to "Cancel policy", edit_policy_path(@policy, anchor: "status_selection"), data: { confirm: "This will take you to the Validation section of this policy's settings. Proceed?" }, class: "ui basic negative right floated button" %>
       <% elsif @policy.cancelled? %>
-        <%= link_to "Re-Issue policy", policy_path(@policy, :policy => {status:"issued", issue_date:Date.today}), :method => :put, data: {:confirm => 'This sets the policy issue date to TODAY. Proceed?'}, class: "ui positive right floated button" %>
+        <%= link_to "Re-Issue policy", edit_policy_path(@policy, anchor: "status_selection"), data: { confirm: "This will take you to the Validation section of this policy's settings. Proceed?" }, class: "ui positive right floated button" %>
       <% end %>
 
       <div class="ui clearing divider"></div>

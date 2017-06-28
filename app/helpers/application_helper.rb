@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   # render error label partial by providing model object and the required form field
-  def render_error_label object, field
-    render('shared/error_label', object: object, field: field) if object.errors.include?(field)
+  def render_error_label(object, field, style='pointing')
+    render('shared/error_label', object: object, field: field, style:style) if object.errors.include?(field)
   end
 end

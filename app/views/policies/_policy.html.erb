@@ -60,7 +60,9 @@
 
   <div class="extra content">
     <span class="right floated">
-      <%= @policy.issued? ? "Issued #{@policy.issue_date.to_s :rfc822}" : @policy.status.humanize %>
+      <h5 class="ui <%= @policy.issued? ? 'green' : 'red' %> header">
+        <%= @policy.issued? ? "Issued #{@policy.issue_date.to_s :rfc822}" : @policy.status.humanize %>
+      </h5>
     </span>
   </div>
 </div>

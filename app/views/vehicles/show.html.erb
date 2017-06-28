@@ -32,7 +32,7 @@
       <!-- make this vary color depending on policy status -->
       <div class="ui center aligned clearing segment">
         <h3 class="ui header">
-          This vehicle is currently <%= @vehicle.policies.where(status: 1).empty? ? "not covered" : "covered under a policy expiring in ... days/months/years" %>
+          This vehicle is currently <%= @vehicle.policies.issued.empty? ? "not covered" : "covered under a policy expiring in ... days/months/years" %>
         </h3>
       </div>
 
@@ -76,7 +76,7 @@
               <div class="green statistic">
                 <div class="value">
                   <% if @vehicle.policies.any? %>
-                    <%= number_to_currency(@vehicle.policies.where(status:1).sum(:commission_amount), unit:"GH₵") %>
+                    <%= number_to_currency(@vehicle.policies.issued.sum(:commission_amount), unit:"GH₵") %>
                   <% else %>
                     --
                   <% end %>
@@ -90,7 +90,7 @@
                 <div class="value">
                   <% if @vehicle.policies.any? %>
                     <!-- TODO introduce helper method to select policies that meet above criteria -->
-                    <%= number_to_currency(@vehicle.policies.sum(:commission_amount), unit:"GH₵") %>
+                    <%= number_to_currency(@vehicle.policies.issued.sum(:commission_amount), unit:"GH₵") %>
                   <% else %>
                     --
                   <% end %>

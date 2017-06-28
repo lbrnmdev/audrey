@@ -28,7 +28,7 @@
             <div class="olive statistic">
               <div class="value">
                 <% if !@insurer.policies.empty? %>
-                  <%= number_to_currency(@insurer.policies.where(created_at: Time.now.beginning_of_week..(Time.now.end_of_week)).sum(:commission_amount), unit: "GH₵") %>
+                  <%= number_to_currency(@insurer.policies.issued.where(issue_date: Time.now.beginning_of_week..(Time.now.end_of_week)).sum(:commission_amount), unit: "GH₵") %>
                 <% else %>
                   --
                 <% end %>
@@ -40,7 +40,7 @@
             <div class="green statistic">
               <div class="value">
                 <% if !@insurer.policies.empty? %>
-                  <%= number_to_currency(@insurer.policies.where(created_at: Time.now.beginning_of_month..(Time.now.end_of_month)).sum(:commission_amount), unit: "GH₵") %>
+                  <%= number_to_currency(@insurer.policies.issued.where(issue_date: Time.now.beginning_of_month..(Time.now.end_of_month)).sum(:commission_amount), unit: "GH₵") %>
                 <% else %>
                   --
                 <% end %>
@@ -52,7 +52,7 @@
             <div class=" teal statistic">
               <div class="value">
                 <% if !@insurer.policies.empty? %>
-                  <%= number_to_currency(@insurer.policies.where(created_at: Time.now.beginning_of_year..(Time.now.end_of_year)).sum(:commission_amount), unit: "GH₵") %>
+                  <%= number_to_currency(@insurer.policies.issued.where(issue_date: Time.now.beginning_of_year..(Time.now.end_of_year)).sum(:commission_amount), unit: "GH₵") %>
                 <% else %>
                   --
                 <% end %>
@@ -68,7 +68,7 @@
         </div>
         <div class="nine wide column">
           <% if !@insurer.policies.empty? %>
-            <%= line_chart @insurer.policies.group_by_day(:created_at).sum(:commission_amount), ytitle:"GH₵" %>
+            <%= line_chart @insurer.policies.issued.group_by_day(:issue_date).sum(:commission_amount), ytitle:"GH₵" %>
           <% else %>
             <%= line_chart [], ytitle:"GH₵" %>
           <% end %>
@@ -93,11 +93,15 @@
             </tr>
           </thead>
           <% @insurer.policies.each do |policy| %>
-            <tr>
+            <tr class="<%= policy.issued? ? 'positive' : 'negative' %>">
               <td class="selectable"><%= policy.number ? (link_to policy.number, policy) : (link_to "Policy number not issued", policy) %></td>
               <td class="selectable"><%= link_to "#{policy.vehicle ? policy.vehicle.registration_no : "--"}", policy.vehicle %></td>
-              <td><%= policy.status %></td>
-              <td class="right aligned"><%= number_to_currency policy.commission_amount, unit:"GH₵" %></td>
+              <td><%= policy.status.humanize %></td>
+              <td class="right aligned">
+                <%= "<del>".html_safe if (policy.cancelled? || policy.not_issued?) %>
+                <%= number_to_currency policy.commission_amount, unit:"GH₵" %></del>
+                <%= "</del>".html_safe if (policy.cancelled? || policy.not_issued?) %>
+              </td>
             </tr>
           <% end %>
         </table>

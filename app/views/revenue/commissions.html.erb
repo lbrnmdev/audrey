@@ -20,7 +20,7 @@
     <div class="green statistic">
       <div class="value">
         <% if !current_user.policies.empty? %>
-          <%= number_to_currency(current_user.policies.where(created_at: Time.now.beginning_of_month..(Time.now.end_of_month)).sum(:commission_amount), unit: "₵") %>
+          <%= number_to_currency(current_user.policies.issued.where(issue_date: Time.now.beginning_of_month..(Time.now.end_of_month)).sum(:commission_amount), unit: "₵") %>
         <% else %>
           --
         <% end %>
@@ -33,7 +33,7 @@
     <div class="green statistic">
       <div class="value">
         <% if !current_user.policies.empty? %>
-          <%= number_to_currency(current_user.policies.where(created_at: Time.now.beginning_of_year..(Time.now.end_of_year)).sum(:commission_amount), unit: "₵") %>
+          <%= number_to_currency(current_user.policies.issued.where(issue_date: Time.now.beginning_of_year..(Time.now.end_of_year)).sum(:commission_amount), unit: "₵") %>
         <% else %>
           --
         <% end %>
@@ -46,7 +46,7 @@
     <div class="green statistic">
       <div class="value">
         <% if !current_user.policies.empty? %>
-          <%= number_to_currency(current_user.policies.sum(:commission_amount), unit: "₵") %>
+          <%= number_to_currency(current_user.policies.issued.sum(:commission_amount), unit: "₵") %>
         <% else %>
           --
         <% end %>
@@ -67,7 +67,7 @@
   <!-- revenue per insurer line chart -->
   <% if !current_user.insurers.empty? %>
   <%= line_chart current_user.insurers.map {  |insurer|
-    { name: insurer.name.capitalize, data: insurer.policies.group_by_month(:created_at).sum(:commission_amount) }
+    { name: insurer.name.capitalize, data: insurer.policies.issued.group_by_month(:issue_date).sum(:commission_amount) }
   }, ytitle:"Commission (₵)", legend:"bottom" %>
   <% else %>
     <%= line_chart [], ytitle:"Commission (₵)", legend:"bottom" %>
@@ -89,8 +89,8 @@
       <% current_user.insurers.each do |insurer| %>
         <tr>
           <td><%= link_to insurer.name.capitalize, insurer %></td>
-          <td class="right aligned"><%= number_to_currency(insurer.policies.where(created_at: Time.now.beginning_of_month..(Time.now.end_of_month)).sum(:commission_amount), unit: "₵") %></td>
-          <td class="right aligned"><%= number_to_currency(insurer.policies.where(created_at: Time.now.beginning_of_year..(Time.now.end_of_year)).sum(:commission_amount), unit: "₵") %></td>
+          <td class="right aligned"><%= number_to_currency(insurer.policies.issued.where(issue_date: Time.now.beginning_of_month..(Time.now.end_of_month)).sum(:commission_amount), unit: "₵") %></td>
+          <td class="right aligned"><%= number_to_currency(insurer.policies.issued.where(issue_date: Time.now.beginning_of_year..(Time.now.end_of_year)).sum(:commission_amount), unit: "₵") %></td>
         </tr>
       <% end %>
     </tbody>

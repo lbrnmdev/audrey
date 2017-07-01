@@ -94,9 +94,11 @@
           </thead>
           <% @insurer.policies.each do |policy| %>
             <tr class="<%= policy.issued? ? 'positive' : 'negative' %>">
-              <td class="selectable"><%= policy.number ? (link_to policy.number, policy) : (link_to "Policy number not issued", policy) %></td>
+              <td class="selectable" data-tooltip="<%= policy_cell_pop_up policy %>" data-position="right center">
+                <%= policy.number ? (link_to policy.number, policy) : (link_to "Policy number not issued", policy) %>
+              </td>
               <td class="selectable"><%= link_to "#{policy.vehicle ? policy.vehicle.registration_no : "--"}", policy.vehicle %></td>
-              <td><%= policy.status.humanize %></td>
+              <td><%= policy.status.humanize + " #{'(expired)' if policy.expired?}" %></td>
               <td class="right aligned">
                 <%= "<del>".html_safe if (policy.cancelled? || policy.not_issued?) %>
                 <%= number_to_currency policy.commission_amount, unit:"GH₵" %></del>

@@ -92,7 +92,7 @@
         Please select the policy status
       </div>
     </div>
-    <div id="status_selection" class="three fields">
+    <div id="status_selection" class="two fields">
       <!--  TODO checkboxes from which user can select one of issue, cancelled or expired.
             Expired is disabled by default and the remaining options are also disabled on policy expiration -->
       <div class="field">
@@ -105,12 +105,6 @@
         <div class="ui toggle checkbox">
           <%= f.radio_button(:status, "cancelled")  %>
           <%= f.label(:status, "CANCELLED") %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui disabled toggle checkbox">
-          <%= f.radio_button(:status, "expired", disabled:true)  %>
-          <%= f.label(:status, "EXPIRED") %>
         </div>
       </div>
     </div>

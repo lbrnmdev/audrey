@@ -64,5 +64,10 @@
         <%= @policy.issued? ? "Issued #{@policy.issue_date.to_s :rfc822}" : @policy.status.humanize %>
       </h5>
     </span>
+    <span>
+      <% if @policy.expired? %>
+        <h5 class="ui red header">EXPIRED</h5>
+      <% end %>
+    </span>
   </div>
 </div>

@@ -13,6 +13,23 @@
           </div>
         </div>
 
+        <div class="ui clearing divider"></div>
+
+        <% if @policy.expired? %>
+          <div class="ui warning icon message">
+            <i class="icons">
+              <i class="huge red dont icon"></i>
+              <i class="big black file text icon"></i>
+            </i>
+            <div class="content">
+              <div class="header">
+                EXPIRED
+              </div>
+              <p>Policy's end date has passed</p>
+            </div>
+          </div>
+        <% end %>
+
         <%= render 'policy_form', policy: @policy, action: 'Save changes' %>
 
         <div class="ui divider"></div>

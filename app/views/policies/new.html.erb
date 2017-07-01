@@ -4,7 +4,10 @@
       <div class="sixteen wide mobile eight wide tablet eight wide computer column">
 
         <div class="ui header">
-          <i class="file text icon"></i>
+          <i class="big icons">
+            <i class="file text icon"></i>
+            <i class="corner add icon"></i>
+          </i>
           <div class="content">
             Add Policy
             <div class="sub header">
@@ -12,6 +15,8 @@
             </div>
           </div>
         </div>
+
+        <div class="ui clearing divider"></div>
 
         <%= render 'policy_form', policy: @policy, action: 'Add Policy' %>
 

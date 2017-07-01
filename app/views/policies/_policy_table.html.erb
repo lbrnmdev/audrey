@@ -10,10 +10,17 @@
 
   <% policies.each do |policy| %>
     <tr>
-      <td class="selectable"><%= policy.number ? (link_to policy.number, policy) : (link_to "Policy number not issued", policy) %></td>
-      <td class="selectable"><%= link_to "#{policy.vehicle ? policy.vehicle.registration_no : "--"}", '#' %></td>
+      <td class="selectable" data-tooltip="<%= policy_cell_pop_up policy %>" data-position="right center">
+        <%= policy.number ? (link_to policy.number, policy) : (link_to "Policy number not given", policy) %>
+      </td>
+      <td class="selectable">
+        <!--IDEA icon dependant on asset type, will have to remove cell's selectable class though -->
+        <%= link_to "#{policy.vehicle ? policy.vehicle.registration_no : "--"}", '#' %>
+      </td>
       <td class="selectable"><%= policy.insurer ? link_to(policy.insurer.name.upcase, policy.insurer) : '--unavailable--' %></td>
-      <td class="selectable"><%= link_to policy.status, policy %></td>
+      <td class="selectable <%= policy_table_cell_class policy %>" data-tooltip="<%= policy_cell_pop_up policy %>" data-position="left center">
+        <%= link_to (policy.status.humanize + " #{'(expired)' if policy.expired?}"), policy %>
+      </td>
     </tr>
   <% end %>
 </table>

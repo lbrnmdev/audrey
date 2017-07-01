@@ -21,6 +21,14 @@ class Policy < ApplicationRecord
   validates :user, presence: true
   validates :commission_amount, numericality: { greater_than_or_equal_to: 0 }
 
+  def expired?
+    if end_date
+      end_date.past?
+    else
+      false
+    end
+  end
+
   private
 
     def calculate_commission_amount
@@ -29,7 +37,7 @@ class Policy < ApplicationRecord
     end
 
     def end_date_after_start_date
-      if end_date < start_date
+      if end_date && (end_date < start_date)
         errors.add :end_date, "has to be same as or after Start date"
       end
     end

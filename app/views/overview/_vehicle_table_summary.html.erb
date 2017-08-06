@@ -1,0 +1,54 @@
+<div class="ui top attached clearing segment">
+  <h3 class="ui left floated header">
+      <i class="car icon"></i>
+      <div class="content">
+        Vehicles
+        <div class="sub header">
+          Showing <b><%= vehicles.take(5).count %></b> of <b><%= pluralize(vehicles.count, 'vehicle') %></b>
+        </div>
+      </div>
+  </h3>
+  <%= link_to new_vehicle_path do %>
+    <div class="ui teal circular basic icon large button right floated" data-tooltip="add new vehicle" data-inverted="" data-position="bottom center">
+      <i class="plus icon"></i>
+    </div>
+  <% end %>
+</div>
+
+<div class="ui bottom attached segment">
+  <table class="ui unstackable selectable teal fixed single line very basic small table">
+    <thead>
+      <tr>
+        <th>Reg No</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th class="right aligned">Client</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if vehicles.any? %>
+        <% @vehicles.take(5).each do |vehicle| %>
+          <tr>
+            <td class="selectable"><%= link_to vehicle.registration_no, vehicle %></td>
+            <td><%= vehicle.make %></td>
+            <td><%= vehicle.model %></td>
+            <td class="selectable right aligned"><%= link_to(("#{vehicle.client.lastname}#{vehicle.client.other_names ? ", #{vehicle.client.other_names}" : ""}"), vehicle.client) %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" class="center aligned">you currently don't have any vehicle info, <%= link_to 'add a new vehicle', new_vehicle_path %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot class="full-width">
+      <tr>
+        <th colspan="4">
+          <h4 class="ui right floated header">
+            <%= link_to 'all vehicles...', vehicles_path %>
+          </h4>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>

@@ -1,8 +1,20 @@
 <div class="ui two column stackable grid container">
   <div class="column">
+    <h4 class="ui horizontal divider header">
+      <i class="address book outline icon"></i>
+      Clients & Policies
+    </h4>
     <%= render 'client_table_summary', clients: @clients %>
+    <div class="ui hidden divider"></div>
+    <%= render 'policy_table_summary', policies: @policies %>
   </div>
   <div class="column">
-    <p>policies</p>
+    <h4 class="ui horizontal divider header">
+      <i class="home icon"></i>
+      Assets
+    </h4>
+    <p>vehicles</p>
+    <div class="ui hidden divider"></div>
+    <p>houses</p>
   </div>
 </div>

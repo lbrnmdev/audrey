@@ -1,0 +1,61 @@
+<div class="ui top attached clearing segment">
+  <h3 class="ui left floated header">
+      <i class="folder open icon"></i>
+      <div class="content">
+        Policies
+        <div class="sub header">
+          Showing <b><%= policies.take(5).count %></b> of <b><%= pluralize(policies.count, 'policy') %></b>
+        </div>
+      </div>
+  </h3>
+  <%= link_to new_policy_path do %>
+    <div class="ui teal circular basic icon large button right floated" data-tooltip="add new policy" data-inverted="" data-position="bottom center">
+      <i class="plus icon"></i>
+    </div>
+  <% end %>
+</div>
+
+<div class="ui bottom attached segment">
+  <table class="ui unstackable selectable teal fixed single line very basic table">
+    <thead>
+      <tr>
+        <th>Policy No.</th>
+        <th>Asset</th>
+        <th>Insurer</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if policies.any? %>
+        <% policies.take(5).each do |policy| %>
+          <tr>
+            <td class="selectable" data-tooltip="<%= policy_cell_pop_up policy %>" data-position="right center">
+              <%= policy.number ? (link_to policy.number, policy) : (link_to "Policy number not given", policy) %>
+            </td>
+            <td class="selectable">
+              <!--IDEA icon dependant on asset type, will have to remove cell's selectable class though -->
+              <%= link_to "#{policy.vehicle ? policy.vehicle.registration_no : "--"}", '#' %>
+            </td>
+            <td class="selectable"><%= policy.insurer ? link_to(policy.insurer.name.upcase, policy.insurer) : '--unavailable--' %></td>
+            <td class="selectable <%= policy_table_cell_class policy %>" data-tooltip="<%= policy_cell_pop_up policy %>" data-position="left center">
+              <%= link_to (policy.status.humanize + " #{'(expired)' if policy.expired?}"), policy %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" class="center aligned">you currently don't have any policy info, <%= link_to 'add a new policy', new_policy_path %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot class="full-width">
+      <tr>
+        <th colspan="4">
+          <h4 class="ui right floated header">
+            <%= link_to 'all policies...', policies_path %>
+          </h4>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>

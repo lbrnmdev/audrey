@@ -1,5 +1,5 @@
 <div class="ui top attached clearing segment">
-  <h3 class="ui left floated header">
+  <h4 class="ui left floated header">
       <i class="car icon"></i>
       <div class="content">
         Vehicles
@@ -7,7 +7,7 @@
           Showing <b><%= vehicles.take(5).count %></b> of <b><%= pluralize(vehicles.count, 'vehicle') %></b>
         </div>
       </div>
-  </h3>
+  </h4>
   <%= link_to new_vehicle_path do %>
     <div class="ui teal circular basic icon large button right floated" data-tooltip="add new vehicle" data-inverted="" data-position="bottom center">
       <i class="plus icon"></i>

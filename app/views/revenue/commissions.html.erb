@@ -11,51 +11,7 @@
   </h1>
 
   <!-- begin total revenue -->
-  <h3 class="ui horizontal divider header">
-    <i class="money icon"></i>
-    Total Revenue
-  </h3>
-
-  <div class="ui three statistics">
-    <div class="green statistic">
-      <div class="value">
-        <% if !current_user.policies.empty? %>
-          <%= number_to_currency(current_user.policies.issued.where(issue_date: Time.now.beginning_of_month..(Time.now.end_of_month)).sum(:commission_amount), unit: "₵") %>
-        <% else %>
-          --
-        <% end %>
-      </div>
-      <div class="label">
-        this month
-      </div>
-    </div>
-
-    <div class="green statistic">
-      <div class="value">
-        <% if !current_user.policies.empty? %>
-          <%= number_to_currency(current_user.policies.issued.where(issue_date: Time.now.beginning_of_year..(Time.now.end_of_year)).sum(:commission_amount), unit: "₵") %>
-        <% else %>
-          --
-        <% end %>
-      </div>
-      <div class="label">
-        this year
-      </div>
-    </div>
-
-    <div class="green statistic">
-      <div class="value">
-        <% if !current_user.policies.empty? %>
-          <%= number_to_currency(current_user.policies.issued.sum(:commission_amount), unit: "₵") %>
-        <% else %>
-          --
-        <% end %>
-      </div>
-      <div class="label">
-        all time
-      </div>
-    </div>
-  </div>
+  <%= render 'total_revenue_summary' %>
   <!-- end total revenue -->
 
   <!-- begin revenue per insurer -->

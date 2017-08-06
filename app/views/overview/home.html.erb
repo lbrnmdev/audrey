@@ -1,20 +1,24 @@
-<div class="ui two column stackable grid container">
-  <div class="column">
-    <h4 class="ui horizontal divider header">
-      <i class="address book outline icon"></i>
-      Clients & Policies
-    </h4>
-    <%= render 'client_table_summary', clients: @clients %>
-    <div class="ui hidden divider"></div>
-    <%= render 'policy_table_summary', policies: @policies %>
-  </div>
-  <div class="column">
-    <h4 class="ui horizontal divider header">
-      <i class="home icon"></i>
-      Assets
-    </h4>
-    <%= render 'vehicle_table_summary', vehicles: @vehicles %>
-    <div class="ui hidden divider"></div>
-    <p>placeholder for houses</p>
+<div class="ui container">
+  <%= render 'revenue/total_revenue_summary' %>
+  <div class="ui hidden divider"></div>
+  <div class="ui two column stackable grid">
+    <div class="column">
+      <h3 class="ui horizontal divider header">
+        <i class="address book outline icon"></i>
+        Clients & Policies
+      </h3>
+      <%= render 'client_table_summary', clients: @clients %>
+      <div class="ui hidden divider"></div>
+      <%= render 'policy_table_summary', policies: @policies %>
+    </div>
+    <div class="column">
+      <h3 class="ui horizontal divider header">
+        <i class="home icon"></i>
+        Assets
+      </h3>
+      <%= render 'vehicle_table_summary', vehicles: @vehicles %>
+      <div class="ui hidden divider"></div>
+      <p>placeholder for houses and other assets</p>
+    </div>
   </div>
 </div>

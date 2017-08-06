@@ -1,5 +1,5 @@
 <div class="ui top attached clearing segment">
-  <h3 class="ui left floated header">
+  <h4 class="ui left floated header">
       <i class="folder open icon"></i>
       <div class="content">
         Policies
@@ -7,7 +7,7 @@
           Showing <b><%= policies.take(5).count %></b> of <b><%= pluralize(policies.count, 'policy') %></b>
         </div>
       </div>
-  </h3>
+  </h4>
   <%= link_to new_policy_path do %>
     <div class="ui teal circular basic icon large button right floated" data-tooltip="add new policy" data-inverted="" data-position="bottom center">
       <i class="plus icon"></i>

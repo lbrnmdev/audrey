@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'overview', to: 'overview#home', as: 'overview'
+
   get 'revenue/commissions'
 
   resources :vehicles
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     authenticated :user do
-      root 'clients#index', as: :authenticated_root
+      root 'overview#home', as: :authenticated_root
     end
 
     unauthenticated do

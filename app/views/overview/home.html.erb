@@ -7,9 +7,9 @@
         <i class="address book outline icon"></i>
         Clients & Policies
       </h3>
-      <%= render 'client_table_summary', clients: @clients %>
-      <div class="ui hidden divider"></div>
       <%= render 'policy_table_summary', policies: @policies %>
+      <div class="ui hidden divider"></div>
+      <%= render 'client_table_summary', clients: @clients %>
     </div>
     <div class="column">
       <h3 class="ui horizontal divider header">

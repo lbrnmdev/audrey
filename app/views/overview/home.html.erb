@@ -1,4 +1,18 @@
 <div class="ui container">
+  <% if !@insurers.any? %>
+    <div class="ui inverted yellow segment">
+      <h2 class="ui header">
+        <i class="warning icon"></i>
+        <div class="content">
+          You need to have at least 1 insurer in the system
+          <div class="sub header">
+            <%= link_to 'Click here to add a new insurer', new_insurer_path %>
+          </div>
+        </div>
+      </h2>
+    </div>
+    <div class="ui divider"></div>
+  <% end %>
   <%= render 'revenue/total_revenue_summary' %>
   <div class="ui hidden divider"></div>
   <div class="ui two column stackable grid">

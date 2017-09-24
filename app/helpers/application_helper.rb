@@ -6,7 +6,8 @@ module ApplicationHelper
         error: "error",
         alert: "error",
         warning: "warning",
-        info: "info"
+        info: "info",
+        notice: "info"
     }[flash_type.to_sym] || flash_type.to_s
   end
 
@@ -16,8 +17,9 @@ module ApplicationHelper
         error: "warning sign icon",
         alert: "warning sign icon",
         warning: "warning circle icon",
-        info: "info circle icon"
-    }[flash_type.to_sym] || 'pointing up icon'
+        info: "info circle icon",
+        notice: "thumbs outline up"
+    }[flash_type.to_sym] || 'info icon'
   end
 
   # render error label partial by providing model object and the required form field

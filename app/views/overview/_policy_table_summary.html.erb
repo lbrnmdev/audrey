@@ -29,16 +29,16 @@
       <% if policies.any? %>
         <% policies.take(5).each do |policy| %>
           <tr>
-            <td class="selectable" data-tooltip="<%= policy_cell_pop_up policy %>" data-position="right center">
+            <td data-tooltip="<%= policy_cell_pop_up policy %>" data-position="right center">
               <%= policy.number ? (link_to policy.number, policy) : (link_to "Policy number not given", policy) %>
             </td>
-            <td class="selectable">
+            <td>
               <!--IDEA icon dependant on asset type, will have to remove cell's selectable class though -->
               <%= link_to "#{policy.vehicle ? policy.vehicle.registration_no : "--"}", '#' %>
             </td>
-            <td class="selectable"><%= policy.insurer ? link_to(policy.insurer.name.upcase, policy.insurer) : '--unavailable--' %></td>
-            <td class="selectable <%= policy_table_cell_class policy %>" data-tooltip="<%= policy_cell_pop_up policy %>" data-position="left center">
-              <%= link_to (policy.status.humanize + " #{'(expired)' if policy.expired?}"), policy %>
+            <td><%= policy.insurer ? link_to(policy.insurer.name.upcase, policy.insurer) : '--unavailable--' %></td>
+            <td class="<%= policy_table_cell_class policy %>" data-tooltip="<%= policy_cell_pop_up policy %>" data-position="left center">
+              <%= policy.status.humanize + " #{'(expired)' if policy.expired?}" %>
             </td>
           </tr>
         <% end %>

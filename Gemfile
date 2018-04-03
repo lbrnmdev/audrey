@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # specify ruby version for heroku
-ruby "2.4.2"
+ruby "2.5.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'
@@ -36,7 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # use semantic-ui for styling
-gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
+gem 'semantic-ui-sass'
 # use devise for authentication
 gem 'devise'
 # use chartkick and groupdate for charts
@@ -48,8 +48,9 @@ group :development, :test do
   gem 'byebug', platform: :mri
   # use rspec for testing
   gem 'rspec-rails', '~> 3.5'
-  # user factory_girl for fixtures
-  gem 'factory_girl_rails'
+  # user factory_girl for fixtures # NOTE factory_girl deprecated, now factory_bot
+  # gem 'factory_girl_rails'
+  gem "factory_bot_rails"
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
 end

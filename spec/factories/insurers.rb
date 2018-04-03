@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :insurer do
     name "MyString"
     full_legal_name "MyString"

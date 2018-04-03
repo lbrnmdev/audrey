@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :policy do
     number "MyString"
     client nil
